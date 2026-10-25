@@ -1,0 +1,42 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Titulo from '../../components/Titulo.astro';
+import Pincelada from '../../components/Pincelada.astro';
+import Marca from '../../components/Marca.astro';
+import { todosLosArticulos, fechaLarga, minutosDeLectura, rutaArticulo } from '../../lib/articulos';
+
+export async function getStaticPaths() {
+  const todos = await todosLosArticulos();
+  return todos.map((articulo, i) => ({
+    params: { id: articulo.id },
+    props: { articulo, siguiente: todos[(i + 1) % todos.length] },
+  }));
+}
+
+const { articulo, siguiente } = Astro.props;
+const { Content } = await render(articulo);
+const { title, dek, autor, fecha, seccion, enfasis } = articulo.data;
+---
+<Base titulo={title} descripcion={dek}>
+  <article class="texto">
+    <header class="texto__encabezado">
+      <Pincelada tipo="celeste" class="texto__pincelada" />
+      <p class="etiqueta"><a href="/archivo/">{seccion}</a> · {fechaLarga(fecha)}</p>
+      <h1 class="texto__titulo"><Titulo titulo={title} enfasis={enfasis} marca="subrayado" /></h1>
+      <p class="texto__dek">{dek}</p>
+      <p class="texto__firma etiqueta">por <strong>{autor}</strong> · {minutosDeLectura(articulo)} min de lectura</p>
+    </header>
+
+    <div class="prosa">
+      <Content />
+    </div>
+
+    <aside class="texto__siguiente">
+      <p class="etiqueta">Seguí leyendo</p>
+      <a href={rutaArticulo(siguiente)}>
+        <Marca tipo="subrayado">{siguiente.data.title}</Marca> <span aria-hidden="true">→</span>
+      </a>
+    </aside>
+  </article>
+</Base>

@@ -1,0 +1,27 @@
+---
+// Trazos a mano sobre una palabra: subrayado, círculo, tachado o resaltador.
+interface Props {
+  tipo: 'subrayado' | 'circulo' | 'tachado' | 'resaltado';
+  tinta?: boolean;
+}
+const { tipo, tinta = false } = Astro.props;
+---
+<span class:list={['marca', `marca--${tipo}`, { 'marca--tinta': tinta }]}>
+  <slot />
+  {tipo === 'subrayado' && (
+    <svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M3 12 C 40 4, 72 16, 112 8 S 172 11, 197 5" />
+      <path d="M14 17 C 60 12, 118 18, 176 13" class="fino" />
+    </svg>
+  )}
+  {tipo === 'circulo' && (
+    <svg viewBox="0 0 200 100" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M172 20 C 124 -2, 22 4, 9 48 C 1 88, 92 99, 152 89 C 199 80, 199 30, 152 14 C 132 8, 108 8, 88 11" />
+    </svg>
+  )}
+  {tipo === 'tachado' && (
+    <svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 11 C 50 4, 118 16, 200 6" />
+    </svg>
+  )}
+</span>

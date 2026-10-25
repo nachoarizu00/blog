@@ -1,0 +1,13 @@
+---
+import Logo from './Logo.astro';
+interface Props { portada?: boolean }
+const { portada = false } = Astro.props;
+---
+<header class:list={['cabecera', { 'cabecera--portada': portada }]}>
+  {portada
+    ? <span class="etiqueta">Nº 00 · octubre 2026</span>
+    : <Logo tamano="sm" />}
+  <nav class="cabecera__nav" aria-label="Principal">
+    <a href="/archivo/">Archivo</a>
+  </nav>
+</header>

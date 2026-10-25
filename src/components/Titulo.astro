@@ -1,0 +1,13 @@
+---
+import Marca from './Marca.astro';
+import { partirTitulo } from '../lib/articulos';
+
+interface Props {
+  titulo: string;
+  enfasis?: string;
+  marca?: 'subrayado' | 'circulo' | 'tachado' | 'resaltado' | null;
+}
+const { titulo, enfasis, marca = null } = Astro.props;
+const [antes, medio, despues] = partirTitulo(titulo, enfasis);
+---
+{marca && medio ? (<>{antes}<Marca tipo={marca}>{medio}</Marca>{despues}</>) : titulo}

@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+import Nota from '../components/Nota.astro';
+import Marca from '../components/Marca.astro';
+import Pincelada from '../components/Pincelada.astro';
+import Titulo from '../components/Titulo.astro';
+import { todosLosArticulos, fechaCorta, rutaArticulo, type Articulo } from '../lib/articulos';
+
+const [principal, cita, a, b, c, d, e] = (await todosLosArticulos()).slice(0, 7) as Articulo[];
+---
+<Base portada>
+  <section class="mastil">
+    <div class="mastil__banda">
+      <Pincelada tipo="encabezado" class="mastil__arte" />
+      <h1 class="mastil__logo"><Logo tamano="xl" enlace={false} /></h1>
+    </div>
+    <div class="mastil__pie">
+      <p class="mastil__sub etiqueta">Revista cultural colectiva — ensayos, crítica e intervenciones libres</p>
+      <p class="mastil__lema">
+        <Nota flecha="arriba">pensamos en serio,<br />escribimos como queremos</Nota>
+      </p>
+    </div>
+  </section>
+
+  <div class="pared">
+    <Pincelada tipo="garabatos-a" class="suelta suelta--1" />
+    <Pincelada tipo="garabatos-b" class="suelta suelta--2" />
+    <Pincelada tipo="garabatos-c" class="suelta suelta--3" />
+    <article class="pieza pieza--principal">
+      <p class="etiqueta">{principal.data.seccion} · {fechaCorta(principal.data.fecha)}</p>
+      <h2 class="pieza__titulo">
+        <a href={rutaArticulo(principal)}><Titulo titulo={principal.data.title} enfasis={principal.data.enfasis} marca="subrayado" /></a>
+      </h2>
+      <p class="pieza__dek">{principal.data.dek}</p>
+      <p class="etiqueta">por {principal.data.autor}</p>
+      {principal.data.nota && <Nota flecha="abajo" class="pieza__nota">{principal.data.nota}</Nota>}
+    </article>
+
+    <blockquote class="cita">
+      <p>
+        «<Marca tipo="resaltado">{cita.data.pull ?? cita.data.dek}</Marca>»
+      </p>
+      <footer>
+        — <a href={rutaArticulo(cita)}>{cita.data.title}</a>, <span class="etiqueta">{cita.data.autor}</span>
+      </footer>
+    </blockquote>
+
+    <article class="pieza pieza--a">
+      <p class="etiqueta">{a.data.seccion} · {fechaCorta(a.data.fecha)}</p>
+      <h2 class="pieza__titulo">
+        <a href={rutaArticulo(a)}><Titulo titulo={a.data.title} enfasis={a.data.enfasis} marca="circulo" /></a>
+      </h2>
+      <p class="pieza__dek">{a.data.dek}</p>
+      <p class="etiqueta">por {a.data.autor}</p>
+      {a.data.nota && <Nota class="pieza__nota">{a.data.nota}</Nota>}
+    </article>
+
+    <article class="pieza pieza--b">
+      <p class="etiqueta">{b.data.seccion} · {fechaCorta(b.data.fecha)}</p>
+      <h2 class="pieza__titulo">
+        <a href={rutaArticulo(b)}><Titulo titulo={b.data.title} enfasis={b.data.enfasis} marca="resaltado" /></a>
+      </h2>
+      <p class="pieza__dek">{b.data.dek}</p>
+      <p class="etiqueta">por {b.data.autor}</p>
+    </article>
+
+    <aside class="temas">
+      <p class="etiqueta">De qué hablamos</p>
+      <ul>
+        <li>política</li>
+        <li>derecho</li>
+        <li>arte</li>
+        <li>cine</li>
+        <li>literatura</li>
+        <li>música</li>
+        <li>filosofía</li>
+        <li><Marca tipo="tachado">etcétera</Marca></li>
+      </ul>
+      <Nota flecha="arriba" class="temas__nota">cualquier cosa</Nota>
+    </aside>
+
+    <article class="pieza pieza--c">
+      <p class="etiqueta">{c.data.seccion} · {fechaCorta(c.data.fecha)}</p>
+      <h2 class="pieza__titulo">
+        <a href={rutaArticulo(c)}><Titulo titulo={c.data.title} enfasis={c.data.enfasis} marca="subrayado" /></a>
+      </h2>
+      <p class="pieza__dek">{c.data.dek}</p>
+      <p class="etiqueta">por {c.data.autor}</p>
+    </article>
+
+    <article class="pieza pieza--d">
+      <p class="etiqueta">{d.data.seccion} · {fechaCorta(d.data.fecha)}</p>
+      <h2 class="pieza__titulo">
+        <a href={rutaArticulo(d)}><Titulo titulo={d.data.title} enfasis={d.data.enfasis} marca="circulo" /></a>
+      </h2>
+      <p class="pieza__dek">{d.data.dek}</p>
+      <p class="etiqueta">por {d.data.autor}</p>
+      {d.data.nota && <Nota flecha="abajo" class="pieza__nota">{d.data.nota}</Nota>}
+    </article>
+
+    <article class="pieza pieza--e">
+      <p class="etiqueta">{e.data.seccion} · {fechaCorta(e.data.fecha)}</p>
+      <h2 class="pieza__titulo">
+        <a href={rutaArticulo(e)}><Titulo titulo={e.data.title} enfasis={e.data.enfasis} marca="resaltado" /></a>
+      </h2>
+      <p class="pieza__dek">{e.data.dek}</p>
+      <p class="etiqueta">por {e.data.autor}</p>
+    </article>
+
+    <a class="todo" href="/archivo/">
+      <span>Todo lo publicado</span>
+      <Marca tipo="subrayado">archivo</Marca>
+      <span class="todo__flecha" aria-hidden="true">→</span>
+    </a>
+  </div>
+</Base>
