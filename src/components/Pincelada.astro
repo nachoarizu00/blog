@@ -5,7 +5,7 @@ interface Props {
   class?: string;
 }
 const { tipo, class: clase } = Astro.props;
-const medidas = { encabezado: [2800, 900], diagonal: [2400, 1100], celeste: [1800, 450], 'garabatos-a': [1000, 700], 'garabatos-b': [1000, 600], 'garabatos-c': [1100, 500] } as const;
+const medidas = { encabezado: [2800, 900], diagonal: [2400, 1100], celeste: [2000, 640], 'garabatos-a': [1000, 700], 'garabatos-b': [1000, 600], 'garabatos-c': [1100, 500] } as const;
 const [w, h] = medidas[tipo];
 ---
 <img class:list={['pincelada', clase]} src={`/arte/${tipo}.webp`} width={w} height={h} alt="" aria-hidden="true" decoding="async" loading={tipo === 'diagonal' || tipo === 'celeste' ? 'eager' : 'lazy'} />

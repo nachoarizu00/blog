@@ -6,7 +6,7 @@ const { portada = false } = Astro.props;
 ---
 <header class:list={['cabecera', { 'cabecera--portada': portada }]}>
   {portada
-    ? <span class="etiqueta">Nº 00 · octubre 2026</span>
+    ? <span class="etiqueta">octubre 2026</span>
     : <Logo tamano="sm" />}
   <Menu />
 </header>

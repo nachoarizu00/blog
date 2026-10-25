@@ -377,10 +377,83 @@ def garabatos_c(seed=9):
     guardar(c, 'garabatos-c.webp', margen=30)
 
 
+def _ruido(w, h, sx, sy, rng):
+    """Ruido suave, estirado: sx/sy son el tamaño de la mancha en píxeles."""
+    base = rng.random((max(2, int(h / sy) + 2), max(2, int(w / sx) + 2)))
+    img = Image.fromarray((base * 255).astype('uint8')).resize((w, h), Image.BICUBIC)
+    n = np.array(img, dtype=float) / 255
+    return (n - n.min()) / (n.max() - n.min() + 1e-9)
+
+
+def manchon(nombre='celeste.webp', seed=5, W=2000, H=640):
+    """Manchón de pintura celeste estilo graffiti: masa irregular, rocío de gotas y chorreaduras."""
+    rng = np.random.default_rng(seed)
+    yy, xx = np.mgrid[0:H, 0:W].astype(float)
+    campo = np.zeros((H, W))
+    cx = np.linspace(260, W - 260, 18)
+    for i, x in enumerate(cx):
+        y = H * 0.5 + 40 * math.sin(i * 0.55) + rng.normal(0, 14)
+        sx, sy = rng.uniform(110, 190), rng.uniform(60, 105)
+        campo += np.exp(-(((xx - x) / sx) ** 2 + ((yy - y) / sy) ** 2))
+    campo = np.clip(campo, 0, 1.4)
+    rayas = _ruido(W, H, 260, 3, rng)      # cerdas: rayas finas y largas
+    rayas2 = _ruido(W, H, 140, 5, rng)
+    medio = _ruido(W, H, 90, 40, rng)
+    fino = _ruido(W, H, 22, 14, rng)
+    grueso = _ruido(W, H, 300, 160, rng)
+    mod = np.clip(campo * 1.4, 0, 1)   # el ruido solo actúa donde hay pintura
+    f = campo * 0.95 + mod * ((rayas - 0.5) * 0.5 + (medio - 0.5) * 0.34 + (fino - 0.5) * 0.34 + (grueso - 0.5) * 0.24)
+    nucleo = np.clip((f - 0.4) / 0.035, 0, 1)
+    seco = 0.55 + 0.45 * np.clip((rayas2 - 0.3) * 2.6, 0, 1)   # pintura que se corta, deja ver el papel
+    alfa = nucleo * seco
+
+    celeste = np.array(CELESTE, dtype=float)
+    tono = 0.82 + 0.3 * medio + 0.3 * (rayas - 0.5)
+    rgb = np.clip(celeste[None, None, :] * tono[..., None], 0, 255)
+    capa = np.zeros((H, W, 4), dtype='uint8')
+    capa[..., :3] = rgb.astype('uint8')
+    capa[..., 3] = (alfa * 255).astype('uint8')
+    img = Image.fromarray(capa, 'RGBA')
+
+    # rocío: gotas pequeñas cerca de la masa
+    cerca = np.array(Image.fromarray((nucleo * 255).astype('uint8')).filter(ImageFilter.GaussianBlur(70)), dtype=float) / 255
+    d = ImageDraw.Draw(img)
+    puestas = 0
+    while puestas < 2300:
+        x, y = rng.uniform(0, W), rng.uniform(0, H)
+        p = cerca[int(y), int(x)] ** 1.8 * (1 - nucleo[int(y), int(x)])
+        if rng.random() < p * 1.8:
+            r = rng.exponential(1.3) + 0.6
+            d.ellipse([x - r, y - r, x + r, y + r], fill=(*CELESTE, int(rng.uniform(150, 255))))
+            puestas += 1
+    # gotas grandes
+    for _ in range(26):
+        x, y = rng.uniform(150, W - 150), rng.uniform(40, H - 40)
+        if 0.02 < cerca[int(y), int(x)] < 0.6:
+            r = rng.uniform(4, 11)
+            d.ellipse([x - r, y - r, x + r, y + r], fill=(*CELESTE, 235))
+    # chorreaduras desde el borde inferior
+    for x in rng.uniform(380, W - 380, 7):
+        col = nucleo[:, int(x)]
+        ys = np.where(col > 0.6)[0]
+        if len(ys) == 0:
+            continue
+        y0 = ys.max() - 4
+        largo = rng.integers(50, 150)
+        ancho = rng.uniform(5, 9)
+        xs = x + np.cumsum(rng.normal(0, 0.35, largo))
+        for k in range(largo):
+            r = ancho / 2 * (1 - 0.25 * k / largo)
+            d.ellipse([xs[k] - r, y0 + k - r, xs[k] + r, y0 + k + r], fill=(*CELESTE, 240))
+        r = ancho * 0.85
+        d.ellipse([xs[-1] - r, y0 + largo - r, xs[-1] + r, y0 + largo + r], fill=(*CELESTE, 240))
+    guardar(img, nombre, margen=50)
+
+
 if __name__ == '__main__':
     hero()
     diagonal()
     garabatos_a()
     garabatos_b()
     garabatos_c()
-    trazo('celeste.webp', CELESTE, 150, 1800, 31, extra=AZUL)
+    manchon()
