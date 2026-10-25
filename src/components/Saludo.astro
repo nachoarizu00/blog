@@ -1,12 +1,18 @@
 ---
-// El saludo, escrito a mano: cada trazo se dibuja siguiendo la caligrafía.
-// Los trazos salen de tools/escribir.mjs (src/data/saludo.json).
+// El saludo, con la misma letra manuscrita del resto del sitio, escrito trazo a trazo.
+// Datos generados por tools/escribir.py (src/data/saludo.json).
 import saludo from '../data/saludo.json';
+const [x, y, w, h] = saludo.viewBox.split(' ').map(Number);
 ---
-<svg class="saludo" viewBox={`-60 -830 ${saludo.ancho + 120} 1060`} role="img" aria-label={saludo.texto} style={`--total:${saludo.duracion}ms`}>
-  <g transform="scale(1 -1)">
-    {saludo.trazos.map((t) => (
-      <path d={t.d} pathLength="1" style={`--ini:${t.inicio}ms;--dur:${t.dur}ms`} />
-    ))}
-  </g>
+<svg class="saludo" viewBox={saludo.viewBox} role="img" aria-label={saludo.texto}>
+  <defs>
+    <mask id="mascara-saludo" maskUnits="userSpaceOnUse" x={x} y={y} width={w} height={h}>
+      <g class="saludo__trazos" style={`stroke-width:${saludo.grosor}`}>
+        {saludo.trazos.map((t) => (
+          <path d={t.d} pathLength="1" style={`--ini:${t.inicio}ms;--dur:${t.dur}ms`} />
+        ))}
+      </g>
+    </mask>
+  </defs>
+  <path class="saludo__letras" d={saludo.contorno} mask="url(#mascara-saludo)" />
 </svg>

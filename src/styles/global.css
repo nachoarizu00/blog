@@ -269,25 +269,21 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
   .mastil__lienzo { width: 150vw; left: 50%; translate: -50% 0; }
 }
 
-/* saludo escrito a mano: cada trazo se dibuja siguiendo la caligrafía */
+/* saludo escrito a mano: la letra aparece trazo a trazo, siguiendo la caligrafía */
 .saludo {
   --inicio: 1.3s;        /* arranca después de que aparece la portada */
   position: absolute;
   z-index: 1;
-  left: 21%;
-  top: 0.5%;
-  width: max(31cqw, 15rem);
+  left: 20%;
+  top: 4%;
+  width: max(29cqw, 14rem);
   height: auto;
   overflow: visible;
-  fill: none;
-  stroke: var(--tinta);
-  stroke-width: 62;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
-@media (max-width: 899px) { .saludo { stroke-width: 95; left: 18%; top: 2%; } }
+.saludo__letras { fill: var(--tinta); }
+.saludo__trazos { fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; }
 @media (prefers-reduced-motion: no-preference) {
-  .saludo path {
+  .saludo__trazos path {
     stroke-dasharray: 1 2;
     stroke-dashoffset: 1;
     animation: dibujar var(--dur) linear forwards;

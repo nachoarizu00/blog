@@ -28,8 +28,5 @@
     "sanity": "^6.20.0",
     "styled-components": "^6.6.0",
     "typescript": "^6.0.3"
-  },
-  "devDependencies": {
-    "hersheytext": "^2.0.0"
   }
 }
