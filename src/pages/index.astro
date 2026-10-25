@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import Logo from '../components/Logo.astro';
 import Nota from '../components/Nota.astro';
 import Marca from '../components/Marca.astro';
 import Pieza from '../components/Pieza.astro';
@@ -12,10 +11,9 @@ const [principal, cita, a, b, c, d, e] = (await todosLosArticulos()).slice(0, 7)
 ---
 <Base portada>
   <section class="mastil">
-    <div class="mastil__banda">
-      <Pincelada tipo="encabezado" class="mastil__arte" />
-      <h1 class="mastil__logo"><Logo tamano="xl" enlace={false} /></h1>
-    </div>
+    <h1 class="mastil__banda">
+      <img class="mastil__imagen" src="/arte/encabezado.webp" width="2000" height="667" alt="cualquiera" fetchpriority="high" decoding="async" />
+    </h1>
     <div class="mastil__pie">
       <p class="mastil__sub etiqueta">Revista cultural colectiva — ensayos, crítica e intervenciones libres</p>
       <p class="mastil__lema">
