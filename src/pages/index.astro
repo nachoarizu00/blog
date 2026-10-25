@@ -15,10 +15,10 @@ const [principal, cita, a, b, c, d, e] = (await todosLosArticulos()).slice(0, 7)
       <img class="mastil__imagen" src="/arte/encabezado.webp" width="2000" height="667" alt="cualquiera" fetchpriority="high" decoding="async" />
     </h1>
     <div class="mastil__pie">
-      <p class="mastil__sub etiqueta">Revista cultural colectiva — ensayos, crítica e intervenciones libres</p>
       <p class="mastil__lema">
-        <Nota flecha="arriba">pensamos en serio,<br />escribimos como queremos</Nota>
+        <Nota flecha="bajando">pensamos en serio,<br />escribimos como queremos</Nota>
       </p>
+      <p class="mastil__sub etiqueta">Revista cultural colectiva — ensayos, crítica e intervenciones libres</p>
     </div>
   </section>
 
@@ -27,7 +27,7 @@ const [principal, cita, a, b, c, d, e] = (await todosLosArticulos()).slice(0, 7)
     <Pincelada tipo="garabatos-b" class="suelta suelta--2" />
     <Pincelada tipo="garabatos-c" class="suelta suelta--3" />
 
-    {principal && <Pieza articulo={principal} variante="principal" marca="subrayado" flecha="abajo" />}
+    {principal && <Pieza articulo={principal} variante="principal" marca="subrayado" />}
 
     {cita && (
       <blockquote class="cita">
@@ -59,7 +59,7 @@ const [principal, cita, a, b, c, d, e] = (await todosLosArticulos()).slice(0, 7)
     </aside>
 
     {c && <Pieza articulo={c} variante="c" marca="subrayado" />}
-    {d && <Pieza articulo={d} variante="d" marca="circulo" flecha="abajo" />}
+    {d && <Pieza articulo={d} variante="d" marca="circulo" />}
     {e && <Pieza articulo={e} variante="e" marca="resaltado" />}
 
     <a class="todo" href="/archivo/">

@@ -1,14 +1,20 @@
 ---
 // Anotación a mano alzada, con flecha opcional.
 interface Props {
-  flecha?: 'abajo' | 'arriba' | 'ninguna';
+  flecha?: 'abajo' | 'arriba' | 'bajando' | 'ninguna';
   class?: string;
 }
 const { flecha = 'ninguna', class: clase } = Astro.props;
 ---
 <span class:list={['nota', `nota--${flecha}`, clase]} aria-hidden="false">
   <span class="nota__texto"><slot /></span>
-  {flecha !== 'ninguna' && (
+  {flecha === 'bajando' && (
+    <svg class="nota__flecha nota__flecha--baja" viewBox="0 0 50 80" aria-hidden="true">
+      <path d="M30 2 C 8 22, 42 46, 24 72" />
+      <path d="M13 60 L24 73 L36 60" />
+    </svg>
+  )}
+  {(flecha === 'abajo' || flecha === 'arriba') && (
     <svg class="nota__flecha" viewBox="0 0 60 50" aria-hidden="true">
       <path d="M4 6 C 8 30, 24 44, 52 40" />
       <path d="M40 30 L 53 40 L 38 46" />

@@ -267,14 +267,12 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 @media (max-width: 899px) {
   .mastil__imagen { position: relative; left: 50%; width: 150vw; max-width: none; translate: -50% 0; }
 }
-.mastil__pie { display: grid; gap: 0.5rem; margin-top: 0.6rem; }
-.mastil__sub { max-width: 20rem; }
-.mastil__lema .nota { font-size: clamp(1.7rem, 2.8vw, 2.5rem); rotate: -2deg; color: var(--tinta); }
+.mastil__pie { display: grid; justify-items: center; gap: 0.9rem; margin-top: -2.2rem; text-align: center; position: relative; z-index: 1; }
+.mastil__sub { max-width: 26rem; }
+.mastil__lema .nota { font-size: clamp(1.8rem, 3vw, 2.6rem); rotate: -2deg; color: var(--tinta); text-align: center; align-items: center; }
 .mastil__lema .nota__flecha { stroke: var(--tinta); }
-@media (min-width: 900px) {
-  .mastil__pie { grid-template-columns: 1fr auto; align-items: start; margin-top: 0.4rem; }
-  .mastil__lema { margin-right: 6%; }
-}
+.nota--bajando { flex-direction: column-reverse; align-items: center; gap: 0.3rem; }
+.nota__flecha--baja { width: 2.4rem; height: auto; }
 
 /* ───────── Portada: la pared ───────── */
 .pared {
