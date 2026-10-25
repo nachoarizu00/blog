@@ -7,7 +7,7 @@ interface Props {
 }
 const { tamano = 'sm', enlace = true } = Astro.props;
 const Etiqueta = enlace ? 'a' : 'span';
-const props = enlace ? { href: '/', 'aria-label': 'cualquiera, inicio' } : { role: 'img', 'aria-label': 'cualquiera' };
+const props = enlace ? { href: '/', 'aria-label': 'cualquiera, inicio' } : { role: 'img' as const, 'aria-label': 'cualquiera' };
 ---
 <Etiqueta class:list={['logo', `logo--${tamano}`]} {...props}>
   {tamano === 'sm' && <Pincelada tipo="celeste" class="logo__pincelada" />}

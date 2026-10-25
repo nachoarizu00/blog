@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 }
 
 const { articulo, siguiente } = Astro.props;
-const { Content } = await render(articulo);
+const { Content } = articulo.cuerpo.tipo === 'markdown' ? await render(articulo.cuerpo.entrada) : { Content: null };
 const { title, dek, autor, fecha, seccion, enfasis } = articulo.data;
 ---
 <Base titulo={title} descripcion={dek}>
@@ -29,7 +29,7 @@ const { title, dek, autor, fecha, seccion, enfasis } = articulo.data;
     </header>
 
     <div class="prosa">
-      <Content />
+      {articulo.cuerpo.tipo === 'html' ? <Fragment set:html={articulo.cuerpo.html} /> : Content && <Content />}
     </div>
 
     <aside class="texto__siguiente">
