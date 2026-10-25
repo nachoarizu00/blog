@@ -269,69 +269,32 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
   .mastil__lienzo { width: 150vw; left: 50%; translate: -50% 0; }
 }
 
-/* saludo escrito con marcador */
-.solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* saludo escrito a mano: cada trazo se dibuja siguiendo la caligrafía */
 .saludo {
   --inicio: 1.3s;        /* arranca después de que aparece la portada */
-  --paso: 62ms;          /* tiempo entre letra y letra */
   position: absolute;
   z-index: 1;
-  left: 24%;
-  top: 15%;
-  font-family: var(--f-texto);
-  font-weight: 500;
-  font-size: max(0.95rem, 2.2cqw);
-  line-height: 1.1;
-  letter-spacing: 0.005em;
-  color: var(--tinta);
-  white-space: nowrap;
-}
-.saludo__texto { position: relative; display: inline-block; }
-.saludo__letra { display: inline-block; white-space: pre; }
-.saludo__punta {
-  position: absolute;
-  left: 0;
-  top: 55%;
-  width: 0.5em;
-  height: 0.2em;
-  border-radius: 0.08em;
-  background: var(--tinta);
-  rotate: -38deg;
-  opacity: 0;
-}
-.saludo__subrayado {
-  position: absolute;
-  left: 0;
-  bottom: -0.35em;
-  width: 21%;
-  height: 0.4em;
+  left: 21%;
+  top: 0.5%;
+  width: max(31cqw, 15rem);
+  height: auto;
   overflow: visible;
   fill: none;
   stroke: var(--tinta);
-  stroke-width: 2.4px;
+  stroke-width: 62;
   stroke-linecap: round;
+  stroke-linejoin: round;
 }
-.saludo__subrayado path { vector-effect: non-scaling-stroke; }
-
-@keyframes escribir {
-  from { clip-path: inset(-15% 100% -15% -2%); }
-  to { clip-path: inset(-15% -6% -15% -2%); }
-}
-@keyframes punta {
-  0% { left: 0; opacity: 1; }
-  96% { left: 100%; opacity: 1; }
-  100% { left: 100%; opacity: 0; }
-}
+@media (max-width: 899px) { .saludo { stroke-width: 95; left: 18%; top: 2%; } }
 @media (prefers-reduced-motion: no-preference) {
-  .saludo__letra {
-    clip-path: inset(-15% 100% -15% -2%);
-    animation: escribir 0.17s steps(4, end) forwards;
-    animation-delay: calc(var(--inicio) + var(--i) * var(--paso));
+  .saludo path {
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1;
+    animation: dibujar var(--dur) linear forwards;
+    animation-delay: calc(var(--inicio) + var(--ini));
   }
-  .saludo__punta { animation: punta calc(24 * var(--paso) + 0.17s) linear forwards; animation-delay: var(--inicio); }
-  .saludo__subrayado { clip-path: inset(-50% 100% -50% 0); animation: trazar-saludo 0.55s cubic-bezier(0.3, 0.7, 0.2, 1) forwards; animation-delay: calc(var(--inicio) + 24 * var(--paso) + 0.25s); }
 }
-@keyframes trazar-saludo { to { clip-path: inset(-50% -5% -50% 0); } }
+@keyframes dibujar { to { stroke-dashoffset: 0; } }
 .mastil__pie { display: grid; justify-items: center; gap: 0.9rem; margin-top: -2.2rem; text-align: center; position: relative; z-index: 1; }
 .mastil__lema .nota { font-size: clamp(1.8rem, 3vw, 2.6rem); rotate: -2deg; color: var(--tinta); text-align: center; align-items: center; }
 .mastil__lema .nota__flecha { stroke: var(--tinta); }

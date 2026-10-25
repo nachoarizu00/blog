@@ -1,0 +1,12 @@
+---
+// El saludo, escrito a mano: cada trazo se dibuja siguiendo la caligrafía.
+// Los trazos salen de tools/escribir.mjs (src/data/saludo.json).
+import saludo from '../data/saludo.json';
+---
+<svg class="saludo" viewBox={`-60 -830 ${saludo.ancho + 120} 1060`} role="img" aria-label={saludo.texto} style={`--total:${saludo.duracion}ms`}>
+  <g transform="scale(1 -1)">
+    {saludo.trazos.map((t) => (
+      <path d={t.d} pathLength="1" style={`--ini:${t.inicio}ms;--dur:${t.dur}ms`} />
+    ))}
+  </g>
+</svg>

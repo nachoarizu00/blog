@@ -4,26 +4,17 @@ import Nota from '../components/Nota.astro';
 import Marca from '../components/Marca.astro';
 import Pieza from '../components/Pieza.astro';
 import Pincelada from '../components/Pincelada.astro';
+import Saludo from '../components/Saludo.astro';
 import { todosLosArticulos, rutaArticulo } from '../lib/articulos';
 
 // La portada se arma con los 7 textos más recientes, pero funciona con cualquier cantidad.
-const saludo = 'hola, se ve que estás en';
 const [principal, cita, a, b, c, d, e] = (await todosLosArticulos()).slice(0, 7);
 ---
 <Base portada>
   <section class="mastil">
     <h1 class="mastil__banda">
       <span class="mastil__lienzo">
-        <span class="saludo">
-          <span class="solo-lectores">{saludo}</span>
-          <span class="saludo__texto" aria-hidden="true">
-            {[...saludo].map((letra, i) => <span class="saludo__letra" style={`--i:${i}`}>{letra}</span>)}
-            <span class="saludo__punta"></span>
-          </span>
-          <svg class="saludo__subrayado" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M2 6 C 18 2, 38 9, 58 4 S 88 6, 98 3" />
-          </svg>
-        </span>
+        <Saludo />
         <img class="mastil__imagen" src="/arte/encabezado.webp" width="2000" height="667" alt="cualquiera" fetchpriority="high" decoding="async" />
       </span>
     </h1>
