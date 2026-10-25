@@ -6,7 +6,6 @@ fecha: 2026-08-29
 seccion: Filosofía
 enfasis: "colectivo"
 pull: "Nadie en una parada pregunta lo que pregunta. Todos entendemos perfectamente."
-nota: "viajé de pie, pensé sentado"
 ---
 Subo al 60 en hora pico. Contra todo pronóstico encuentro un hueco entre una mochila y una señora con bolsas, y me preparo para treinta y cinco minutos de pensamiento errático. Todavía no sé que el viaje va a darme material para un ensayo.
 

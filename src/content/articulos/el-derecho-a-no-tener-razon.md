@@ -5,7 +5,6 @@ autor: "Mora Taibo"
 fecha: 2026-10-20
 seccion: Derecho
 enfasis: "no tener razón"
-nota: "empezá por acá"
 pull: "Una sentencia es la forma más solemne que existe de decir «creo que»."
 ---
 Hay una escena que se repite en todos los tribunales del mundo y que nadie parece notar. Alguien se levanta, se aclara la garganta, y lee en voz alta una frase que empieza con «Resulta». Resulta que los hechos ocurrieron de tal manera. Resulta que la norma dice tal cosa. Resulta, en fin, que las cosas son como el que lee decide que son, y que a partir de ese momento serán así para todos los efectos legales, incluidos los que nadie imaginó.

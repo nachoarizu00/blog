@@ -26,8 +26,6 @@ const articulos = defineCollection({
     pull: z.string().optional(),
     // palabra(s) del título que se intervienen con un trazo
     enfasis: z.string().optional(),
-    // anotación a mano alzada que acompaña la pieza en la portada
-    nota: z.string().optional(),
   }),
 });
 

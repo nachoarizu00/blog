@@ -13,7 +13,6 @@ export interface DatosArticulo {
   seccion: (typeof SECCIONES)[number];
   pull?: string;
   enfasis?: string;
-  nota?: string;
 }
 
 export interface Articulo {
@@ -32,7 +31,7 @@ const sanity = createClient({
 });
 
 const CONSULTA = `*[_type == "articulo" && defined(slug.current)] | order(fecha desc) {
-  "id": slug.current, title, dek, autor, fecha, seccion, pull, enfasis, nota, cuerpo
+  "id": slug.current, title, dek, autor, fecha, seccion, pull, enfasis, cuerpo
 }`;
 
 type Bloque = { _type: string; children?: { text?: string }[] };

@@ -5,7 +5,6 @@ autor: "Tomás Esquivel"
 fecha: 2026-10-12
 seccion: Cine
 pull: "En el minuto veintiséis alguien tosió y toda la sala sintió que había sido un acto de valentía."
-nota: "(no hay spoilers, solo tos)"
 ---
 Fui a ver una película de tres horas que, según me advirtieron, «no pasa nada». Pasa, en realidad, mucho: pasa el tiempo. Pasa la luz por una cocina. Pasa una mujer de un cuarto a otro con una taza que nunca llega a tomar.
 

@@ -5,7 +5,6 @@ autor: "Ana Quiroga"
 fecha: 2026-08-15
 seccion: Cualquier cosa
 enfasis: "trámite"
-nota: "sí, en serio"
 pull: "El trámite es la única forma que tiene el Estado de mirarte a los ojos."
 ---
 Es fácil hablar mal del trámite. Es, de hecho, el deporte nacional de las sociedades modernas. Pero detrás de cada formulario hay una idea hermosa: que la existencia de una persona puede ser verificada por otra persona con un sello.

@@ -5,7 +5,6 @@ autor: "Irene Casal"
 fecha: 2026-10-03
 seccion: Literatura
 enfasis: "chisme"
-nota: "ojo, esto es un chisme"
 pull: "Los libros no se leen para tener opinión. Se leen para tener de qué hablar."
 ---
 Una reseña típica dice que el libro «logra», «aborda», «propone» y «se pregunta». Es una prosa de formulario. Uno termina de leerla sabiendo qué *es* el libro y ni la menor idea de qué *hace*.

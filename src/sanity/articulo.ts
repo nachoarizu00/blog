@@ -39,12 +39,6 @@ export const articulo = defineType({
       description: 'Una palabra o frase del título que lleva subrayado, círculo o resaltador. Debe estar escrita igual que en el título. Opcional.',
     }),
     defineField({
-      name: 'nota',
-      title: 'Anotación a mano (portada)',
-      type: 'string',
-      description: 'Frase corta que aparece escrita a mano junto a la pieza. Opcional.',
-    }),
-    defineField({
       name: 'cuerpo',
       title: 'Texto',
       type: 'array',

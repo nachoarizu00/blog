@@ -5,7 +5,6 @@ autor: "Julia Arrieta"
 fecha: 2026-09-10
 seccion: Política
 enfasis: "incómodos"
-nota: "tercera vía (sin comillas)"
 ---
 Cada tanto una estatua se convierte en noticia. Alguien la pinta, alguien la defiende, alguien exige quitarla, alguien pregunta por qué ahora. El debate se organiza enseguida en dos bandos con la elegancia de un partido de fútbol: los que quieren borrar la historia y los que quieren congelarla.
 

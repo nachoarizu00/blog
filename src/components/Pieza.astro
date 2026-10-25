@@ -1,5 +1,4 @@
 ---
-import Nota from './Nota.astro';
 import Titulo from './Titulo.astro';
 import { fechaCorta, rutaArticulo, type Articulo } from '../lib/articulos';
 
@@ -7,10 +6,9 @@ interface Props {
   articulo: Articulo;
   variante: 'principal' | 'a' | 'b' | 'c' | 'd' | 'e';
   marca: 'subrayado' | 'circulo' | 'resaltado';
-  flecha?: 'abajo' | 'ninguna';
 }
-const { articulo, variante, marca, flecha = 'ninguna' } = Astro.props;
-const { seccion, fecha, title, enfasis, dek, autor, nota } = articulo.data;
+const { articulo, variante, marca } = Astro.props;
+const { seccion, fecha, title, enfasis, dek, autor } = articulo.data;
 ---
 <article class={`pieza pieza--${variante}`}>
   <p class="etiqueta">{seccion} · {fechaCorta(fecha)}</p>
@@ -19,5 +17,4 @@ const { seccion, fecha, title, enfasis, dek, autor, nota } = articulo.data;
   </h2>
   <p class="pieza__dek">{dek}</p>
   <p class="etiqueta">por {autor}</p>
-  {nota && <Nota flecha={flecha} class="pieza__nota">{nota}</Nota>}
 </article>
