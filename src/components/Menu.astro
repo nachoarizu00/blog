@@ -1,0 +1,65 @@
+---
+const secciones = [
+  { texto: 'Archivo', href: '/archivo/' },
+  { texto: 'Nosotros', href: '/nosotros/' },
+  { texto: 'Contacto', href: '/contacto/' },
+];
+const actual = Astro.url.pathname;
+---
+<button class="menu-boton" type="button" aria-label="Abrir menú" aria-haspopup="dialog" aria-controls="menu" data-menu-abrir>
+  <span></span><span></span><span></span>
+</button>
+
+<dialog id="menu" class="menu" aria-label="Menú">
+  <div class="menu__panel">
+    <button class="menu__cerrar" type="button" aria-label="Cerrar menú" data-menu-cerrar>
+      <span></span><span></span>
+    </button>
+    <nav aria-label="Principal">
+      <ul class="menu__lista">
+        {secciones.map((s, i) => (
+          <li>
+            <a href={s.href} aria-current={actual.startsWith(s.href) ? 'page' : undefined}>
+              <span class="etiqueta menu__numero">{String(i + 1).padStart(2, '0')}</span>
+              <span class="menu__texto">{s.texto}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</dialog>
+
+<script>
+  const menu = document.querySelector<HTMLDialogElement>('#menu');
+  const abrir = document.querySelector<HTMLButtonElement>('[data-menu-abrir]');
+  let cerrando = false;
+
+  function abrirMenu() {
+    if (!menu || menu.open) return;
+    menu.showModal();
+    abrir?.setAttribute('aria-expanded', 'true');
+    requestAnimationFrame(() => menu.classList.add('menu--visible'));
+  }
+
+  function cerrarMenu() {
+    if (!menu || !menu.open || cerrando) return;
+    cerrando = true;
+    menu.classList.remove('menu--visible');
+    const terminar = () => {
+      menu.close();
+      abrir?.setAttribute('aria-expanded', 'false');
+      cerrando = false;
+    };
+    // sin movimiento reducido, esperamos a que termine el deslizamiento
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) terminar();
+    else setTimeout(terminar, 420);
+  }
+
+  abrir?.addEventListener('click', abrirMenu);
+  menu?.querySelector('[data-menu-cerrar]')?.addEventListener('click', cerrarMenu);
+  // clic fuera del panel (sobre el fondo atenuado)
+  menu?.addEventListener('click', (e) => { if (e.target === menu) cerrarMenu(); });
+  // Esc: usamos nuestra animación en lugar del cierre abrupto
+  menu?.addEventListener('cancel', (e) => { e.preventDefault(); cerrarMenu(); });
+</script>

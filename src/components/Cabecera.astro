@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import Menu from './Menu.astro';
 interface Props { portada?: boolean }
 const { portada = false } = Astro.props;
 ---
@@ -7,7 +8,5 @@ const { portada = false } = Astro.props;
   {portada
     ? <span class="etiqueta">Nº 00 · octubre 2026</span>
     : <Logo tamano="sm" />}
-  <nav class="cabecera__nav" aria-label="Principal">
-    <a href="/archivo/">Archivo</a>
-  </nav>
+  <Menu />
 </header>
