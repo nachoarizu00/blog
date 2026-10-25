@@ -267,9 +267,6 @@ def hero(seed=3):
     circulo(c, 600, 300, 60, CORAL, rng, 20)
     for x, ancho in [(700, 6), (1580, 5), (2250, 7), (1050, 5)]:
         goteo(c, x, 620, rng.integers(60, 190), ancho, AZUL if x != 1580 else CELESTE, rng)
-    lapiz(c, (520, 330), 160, 7, rng, pasadas=3)
-    lapiz(c, (1750, 560), 170, 7, rng, pasadas=3)
-    lapiz(c, (2450, 360), 130, 7, rng, pasadas=2)
     puntos(c, (2350, 120), 4, 6, 34, 8, rng, [NEGRO, CORAL, AZUL_PROFUNDO])
     gesto(c, [(1450, 130), (1380, 70), (1330, 150), (1420, 190), (1520, 120), (1600, 60), (1700, 140)], 15, rng)
     gesto(c, [(2480, 610), (2540, 560), (2600, 650), (2690, 590)], 13, rng)
@@ -296,9 +293,6 @@ def cuadro_a(seed=11):
     gesto(c, [(300, 250), (240, 330), (330, 420), (400, 300), (330, 230)], 14, rng)
     gesto(c, [(1050, 300), (1130, 380), (1090, 520), (1180, 560)], 13, rng)
     gesto(c, [(380, 1000), (430, 920), (480, 1050), (560, 960)], 12, rng)
-    lapiz(c, (330, 640), 150, 7, rng, pasadas=3)
-    lapiz(c, (1100, 720), 190, 7, rng, pasadas=3)
-    lapiz(c, (700, 1180), 140, 7, rng, pasadas=2)
     goteo(c, 760, 900, 220, 6, CELESTE, rng)
     goteo(c, 540, 1160, 160, 6, CORAL, rng)
     salpicado(c, (150, 150, 1350, 1350), 140, AZUL, rng, 7)
@@ -318,9 +312,6 @@ def cuadro_b(seed=21):
     pincelada(c, [(300, 980), (700, 930), (1120, 1000)], 70, CORAL, rng, 0.9, seco=0.8)
     circulo(c, 1130, 640, 125, CORAL, rng, 28)
     circulo(c, 320, 560, 85, CORAL, rng, 24)
-    lapiz(c, (820, 700), 170, 7, rng, pasadas=3)
-    lapiz(c, (1320, 300), 150, 7, rng, pasadas=3)
-    lapiz(c, (330, 900), 120, 7, rng, pasadas=2)
     puntos(c, (1380, 420), 5, 5, 28, 7, rng, [CELESTE_CLARO, AZUL, NEGRO])
     gesto(c, [(1000, 180), (1040, 260), (980, 330), (1090, 300), (1180, 220)], 13, rng)
     gesto(c, [(240, 220), (310, 180), (290, 280), (390, 240)], 12, rng)
@@ -347,7 +338,6 @@ def gestos(seed=5):
     gesto(c, [(120, 120), (60, 240), (140, 400), (260, 320), (190, 200), (320, 130), (480, 290), (560, 180)], 13, rng)
     gesto(c, [(640, 110), (700, 210), (660, 320), (800, 340), (880, 240), (990, 160), (1100, 260)], 11, rng)
     gesto(c, [(300, 470), (370, 410), (350, 510), (470, 450)], 9, rng)
-    lapiz(c, (700, 400), 220, 11, rng, giro=0.7, pasadas=3)
     puntos(c, (900, 380), 3, 6, 30, 6, rng, [NEGRO, CORAL])
     guardar(c, 'gestos.webp', margen=30)
 
@@ -367,8 +357,6 @@ def diagonal(seed=7):
 def garabatos_a(seed=2):
     rng = np.random.default_rng(seed)
     c = lienzo(1000, 700)
-    lapiz(c, (330, 330), 190, 7, rng, pasadas=3)
-    lapiz(c, (620, 400), 110, 7, rng, pasadas=2)
     gesto(c, [(140, 120), (90, 220), (170, 320), (260, 230), (200, 140), (330, 120), (450, 230)], 14, rng)
     gesto(c, [(640, 130), (700, 210), (660, 300), (790, 280)], 12, rng)
     guardar(c, 'garabatos-a.webp', margen=30)
@@ -378,7 +366,6 @@ def garabatos_b(seed=4):
     rng = np.random.default_rng(seed)
     c = lienzo(1000, 600)
     puntos(c, (120, 120), 4, 7, 36, 8, rng, [NEGRO, NEGRO, AZUL_PROFUNDO, CORAL])
-    lapiz(c, (640, 380), 170, 7, rng, pasadas=3)
     gesto(c, [(430, 450), (500, 380), (470, 500), (590, 440)], 12, rng)
     guardar(c, 'garabatos-b.webp', margen=30)
 
@@ -387,7 +374,6 @@ def garabatos_c(seed=9):
     rng = np.random.default_rng(seed)
     c = lienzo(1100, 500)
     gesto(c, [(80, 260), (160, 160), (140, 340), (270, 250), (380, 170), (460, 300), (580, 220)], 13, rng)
-    lapiz(c, (760, 260), 150, 7, rng, pasadas=3)
     guardar(c, 'garabatos-c.webp', margen=30)
 
 
