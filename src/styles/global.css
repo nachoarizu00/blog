@@ -575,3 +575,11 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 
 .texto__siguiente { position: relative; }
 .texto__siguiente > :not(.pincelada) { position: relative; z-index: 1; }
+
+/* ───────── Nosotros: la imagen va tal cual, sin tocar ───────── */
+.solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.nosotros { padding-top: clamp(0.5rem, 2vw, 2rem); }
+.nosotros__imagen { display: block; width: min(100%, 46rem); height: auto; margin-inline: auto; mix-blend-mode: multiply; }
+@media (max-width: 899px) {
+  .nosotros__imagen { width: 100vw; max-width: none; margin-left: calc(50% - 50vw); }
+}

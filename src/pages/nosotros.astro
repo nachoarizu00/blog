@@ -1,15 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
-import Pincelada from '../components/Pincelada.astro';
-import Nota from '../components/Nota.astro';
+
+// Texto de la imagen, para lectores de pantalla y buscadores.
+const texto = `Cambió la manera de comunicar. Eso está claro.
+
+Tenemos menos tiempo, consumimos más información y nuestra atención se reparte entre demasiadas cosas, todas al mismo tiempo. Pero no estamos tan seguros de que eso signifique que hayamos perdido el interés por entender lo que pasa. Un poco seguimos teniendo las mismas preguntas. Quizás, entonces, es solamente cuestión de encontrar ángulos nuevos.
+
+cualquiera nace un poco de esa intuición. Y de otras. No es tan lineal la cosa honestamente si esto sale bien es un milagro.
+
+No somos una revista académica. Tampoco pretendemos ser un diario. Puede que solo seamos un escape del Imperio de los Formatos — no estaría tan mal. Nos gusta pensar en serio, sí, pero también escribir como queremos.
+
+Nos interesa la política, el arte, la literatura, el cine, la música, la filosofía. Nos interesa cada una de esas cosas por separado, pero mucho más lo que puede pasar cuando de repente se encuentran.
+
+Porque una discusión jurídica puede tener algo que ver con una escena de Friends, una canción de Tan Biónica puede ayudarnos a pensar un problema político importante, y cualquiera de las dos cosas puede cruzarse con una tercera que, en principio, no tenía absolutamente nada que hacer ahí.
+
+Nos gustan esas conexiones. Especialmente si a primera vista hacen ruido.
+
+Creemos, en definitiva, que hay muchas maneras de pensar lo que pasa. Y que vale la pena hacerles lugar.
+
+Si algo de todo esto te convence: mucho gusto, parece que estás en cualquiera.`;
 ---
-<Base titulo="Nosotros">
-  <section class="archivo">
-    <header class="archivo__encabezado">
-      <Pincelada tipo="celeste" class="archivo__pincelada" />
-      <h1 class="archivo__titulo">nosotros</h1>
-      <p class="etiqueta">Próximamente</p>
-      <Nota class="archivo__nota">estamos escribiendo esto</Nota>
-    </header>
+<Base titulo="Nosotros" descripcion="Cambió la manera de comunicar. cualquiera nace un poco de esa intuición: pensamos en serio, escribimos como queremos.">
+  <section class="nosotros">
+    <h1 class="solo-lectores">Nosotros</h1>
+    <img class="nosotros__imagen" src="/arte/nosotros.webp" width="1024" height="1536" alt={texto} decoding="async" />
   </section>
 </Base>
