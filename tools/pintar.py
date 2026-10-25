@@ -9,15 +9,15 @@ from PIL import Image, ImageDraw, ImageFilter
 OUT = os.path.join(os.path.dirname(__file__), '..', 'public', 'arte')
 os.makedirs(OUT, exist_ok=True)
 
-CELESTE = (96, 182, 228)
-CELESTE_CLARO = (150, 212, 240)
-AZUL = (36, 120, 176)
-AZUL_PROFUNDO = (24, 84, 138)
-CORAL = (232, 92, 84)
+CELESTE = (91, 188, 250)
+CELESTE_CLARO = (150, 214, 253)
+AZUL = (56, 160, 238)
+AZUL_PROFUNDO = (40, 130, 215)
+CORAL = (242, 95, 76)
 ROSA = (242, 154, 150)
 OCRE = (190, 164, 118)
 TIERRA = (142, 112, 74)
-NEGRO = (22, 22, 24)
+NEGRO = (10, 10, 11)
 LAPIZ = (90, 94, 104)
 
 
@@ -365,7 +365,7 @@ def garabatos_a(seed=2):
 def garabatos_b(seed=4):
     rng = np.random.default_rng(seed)
     c = lienzo(1000, 600)
-    puntos(c, (120, 120), 4, 7, 36, 8, rng, [NEGRO, NEGRO, AZUL_PROFUNDO, CORAL])
+    puntos(c, (120, 120), 4, 7, 36, 8, rng, [NEGRO, NEGRO, CELESTE, CORAL])
     gesto(c, [(430, 450), (500, 380), (470, 500), (590, 440)], 12, rng)
     guardar(c, 'garabatos-b.webp', margen=30)
 

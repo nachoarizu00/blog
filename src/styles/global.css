@@ -1,15 +1,14 @@
 /* ───────── Tokens ───────── */
 :root {
+  /* Paleta: blanco, negro, celeste (identidad, sacado del encabezado), coral (gesto excepcional), gris hielo */
   --papel: #ffffff;
-  --tinta: #111110;
-  --tinta-suave: #3b3a36;
-  --tenue: #86827a;
-  --regla: rgba(17, 17, 16, 0.2);
-  --marca: #e4493a; /* coral: marcador, anotaciones */
-  --celeste: #68b8e2;
-  --azul: #2a7cae;
-  --coral: #e8625a;
-  --ocre: #b9a57c;
+  --tinta: #0a0a0b;
+  --tinta-suave: #3a3d42;
+  --tenue: #8a9096;
+  --regla: rgba(10, 10, 11, 0.16);
+  --celeste: #5bbcfa;
+  --coral: #f25f4c;
+  --hielo: #eef4f8;
 
   --f-titulo: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
   --f-texto: 'Newsreader Variable', 'Iowan Old Style', Georgia, serif;
@@ -35,11 +34,11 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
 }
-::selection { background: var(--tinta); color: var(--papel); }
+::selection { background: var(--celeste); color: var(--tinta); }
 a { color: inherit; text-decoration: none; }
 h1, h2, h3, p, ul, ol, blockquote, figure { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
-:focus-visible { outline: 2px solid var(--marca); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--tinta); outline-offset: 3px; }
 
 .etiqueta {
   font-family: var(--f-mono);
@@ -49,7 +48,7 @@ ul, ol { padding: 0; list-style: none; }
   color: var(--tinta-suave);
   line-height: 1.5;
 }
-.etiqueta a:hover { text-decoration: underline; text-decoration-color: var(--marca); text-underline-offset: 0.3em; }
+.etiqueta a:hover { text-decoration: underline; text-decoration-color: var(--celeste); text-underline-offset: 0.3em; }
 
 main { overflow-x: clip; }
 main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; padding-inline: var(--margen); }
@@ -69,7 +68,7 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0.5rem 0;
-  background: linear-gradient(var(--marca), var(--marca)) left bottom / 0 2px no-repeat;
+  background: linear-gradient(var(--celeste), var(--celeste)) left bottom / 0 2px no-repeat;
   transition: background-size 0.3s ease;
 }
 .cabecera__nav a:hover { background-size: 100% 2px; }
@@ -112,7 +111,7 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
   font-family: var(--f-mano);
   font-size: clamp(1.7rem, 2.4vw, 2.3rem);
   line-height: 0.95;
-  color: var(--marca);
+  color: var(--coral);
   rotate: -3deg;
   pointer-events: none;
 }
@@ -122,7 +121,7 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
   height: auto;
   overflow: visible;
   fill: none;
-  stroke: var(--marca);
+  stroke: var(--coral);
   stroke-width: 2.4;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -136,7 +135,7 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
   overflow: visible;
   pointer-events: none;
   fill: none;
-  stroke: var(--marca);
+  stroke: var(--coral);
   stroke-width: clamp(2px, 0.045em, 7px);
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -144,7 +143,7 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 .marca svg path { vector-effect: non-scaling-stroke; }
 .marca svg .fino { stroke-width: clamp(1px, 0.02em, 3px); opacity: 0.8; }
 .marca--tinta svg { stroke: var(--tinta); }
-.marca--subrayado svg { left: -1%; width: 102%; bottom: -0.16em; height: 0.26em; }
+.marca--subrayado svg { stroke: var(--celeste); stroke-width: clamp(3px, 0.06em, 9px); left: -1%; width: 102%; bottom: -0.16em; height: 0.26em; }
 .marca--circulo svg { left: -0.3em; top: -0.12em; width: calc(100% + 0.6em); height: calc(100% + 0.24em); }
 .marca--tachado svg { left: -3%; width: 106%; top: 38%; height: 0.3em; }
 
@@ -222,7 +221,7 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
   font-size: var(--tam, 2.4rem);
 }
 .pieza__titulo a::after { content: ''; position: absolute; inset: 0; }
-.pieza__titulo a:hover { text-decoration: underline; text-decoration-color: var(--marca); text-decoration-thickness: 0.05em; text-underline-offset: 0.12em; }
+.pieza__titulo a:hover { text-decoration: underline; text-decoration-color: var(--celeste); text-decoration-thickness: 0.05em; text-underline-offset: 0.12em; }
 .pieza__dek { font-size: 1.1rem; color: var(--tinta-suave); max-width: 30rem; text-wrap: pretty; }
 .pieza__nota { position: absolute; z-index: 2; }
 
@@ -252,7 +251,7 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 }
 .cita footer { margin-top: 1.1rem; font-size: 0.95rem; color: var(--tinta-suave); }
 .cita footer a { text-decoration: underline; text-decoration-color: var(--regla); text-underline-offset: 0.2em; }
-.cita footer a:hover { text-decoration-color: var(--marca); }
+.cita footer a:hover { text-decoration-color: var(--celeste); }
 
 .temas { max-width: 14rem; display: grid; gap: 0.6rem; margin-left: 4%; }
 .temas ul { display: grid; gap: 0.05rem; font-family: var(--f-titulo); font-variation-settings: 'wght' 400, 'opsz' 72; font-size: 1.35rem; line-height: 1.25; }
@@ -356,9 +355,9 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   font-weight: 400;
-  color: var(--marca);
+  color: var(--tenue);
 }
-.prosa a { text-decoration: underline; text-decoration-color: var(--marca); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; }
+.prosa a { text-decoration: underline; text-decoration-color: var(--celeste); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; }
 .prosa blockquote {
   margin-block: 2.6em;
   font-family: var(--f-titulo);
@@ -376,13 +375,13 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
   width: 4.5rem;
   height: 0.38rem;
   margin-bottom: 1.3rem;
-  background: var(--marca);
+  background: var(--celeste);
   border-radius: 0.3rem 0.1rem 0.4rem 0.1rem;
   rotate: -2.5deg;
 }
 .prosa blockquote p + p { margin-top: 0.6em; }
 .prosa hr { border: 0; height: auto; margin-block: 3em; text-align: center; }
-.prosa hr::before { content: '*  *  *'; font-family: var(--f-titulo); font-size: 2rem; letter-spacing: 0.3em; color: var(--marca); white-space: pre; }
+.prosa hr::before { content: '*  *  *'; font-family: var(--f-titulo); font-size: 2rem; letter-spacing: 0.3em; color: var(--celeste); white-space: pre; }
 .prosa hr + p { font-size: 0.95em; color: var(--tinta-suave); font-style: italic; }
 .prosa hr + p::first-letter { all: unset; }
 
@@ -398,7 +397,7 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 }
 .texto__siguiente .marca { white-space: normal; }
 .texto__siguiente .marca svg { display: none; }
-.texto__siguiente a:hover .marca { text-decoration: underline; text-decoration-color: var(--marca); text-decoration-thickness: 0.05em; text-underline-offset: 0.12em; }
+.texto__siguiente a:hover .marca { text-decoration: underline; text-decoration-color: var(--celeste); text-decoration-thickness: 0.05em; text-underline-offset: 0.12em; }
 
 @media (min-width: 900px) {
   .texto__encabezado, .prosa, .texto__siguiente { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--hueco); }
@@ -456,7 +455,8 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
   text-wrap: balance;
   transition: translate 0.3s cubic-bezier(0.3, 0.7, 0.2, 1);
 }
-.fila a:hover .fila__titulo { translate: 0.5rem 0; text-decoration: underline; text-decoration-color: var(--marca); text-decoration-thickness: 0.05em; text-underline-offset: 0.14em; }
+.fila a:hover { background: var(--hielo); box-shadow: -0.9rem 0 0 var(--hielo), 0.9rem 0 0 var(--hielo); }
+.fila a:hover .fila__titulo { translate: 0.5rem 0; text-decoration: underline; text-decoration-color: var(--celeste); text-decoration-thickness: 0.05em; text-underline-offset: 0.14em; }
 @media (min-width: 900px) {
   .anio { grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); column-gap: var(--hueco); }
   .anio__numero { position: sticky; top: 1.5rem; }
