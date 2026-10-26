@@ -594,7 +594,6 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 .nosotros__texto p + p { margin-top: 1.5em; }
 .nosotros__nombre { font-weight: 650; font-size: 1.25em; line-height: 1; letter-spacing: -0.01em; }
 .nosotros__nombre-parrafo { line-height: 1.5; }
-.nosotros__sutil { text-decoration: underline; text-decoration-color: var(--tenue); text-decoration-thickness: 0.05em; text-underline-offset: 0.18em; }
 .nosotros__fuerte, .nosotros__cierre { font-weight: 650; }
 .nosotros__fuerte { font-size: 1.22em; line-height: 1.3; margin-top: 1.7em; }
 
