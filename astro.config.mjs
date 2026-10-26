@@ -3,6 +3,7 @@ import react from '@astrojs/react';
 import sanity from '@sanity/astro';
 
 export default defineConfig({
+  site: 'https://www.cualquieraonline.com',
   integrations: [
     sanity({
       projectId: 'n6mrjy1q',

@@ -18,11 +18,13 @@ interface Props {
 }
 const {
   titulo,
-  descripcion = 'cualquiera, revista cultural colectiva de ensayos, crítica e intervenciones libres. Pensamos en serio, escribimos como queremos.',
+  descripcion = '¿Vos en cuál estás?',
   portada = false,
   logoImagen = false,
 } = Astro.props;
-const tituloPagina = titulo ? `${titulo} — cualquiera` : 'cualquiera — revista cultural colectiva';
+const tituloPagina = titulo ? `${titulo} — cualquiera Online` : 'cualquiera Online';
+const urlCanonica = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const imagenCompartir = new URL('/og.png', Astro.site ?? Astro.url).href;
 ---
 <!doctype html>
 <html lang="es">
@@ -31,6 +33,17 @@ const tituloPagina = titulo ? `${titulo} — cualquiera` : 'cualquiera — revis
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={descripcion} />
     <meta name="theme-color" content="#ffffff" />
+    <link rel="canonical" href={urlCanonica} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="cualquiera Online" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content={tituloPagina} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={urlCanonica} />
+    <meta property="og:image" content={imagenCompartir} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
