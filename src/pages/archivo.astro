@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import Nota from '../components/Nota.astro';
 import { todosLosArticulos, fechaCorta, rutaArticulo, minutosDeLectura } from '../lib/articulos';
 
 const articulos = await todosLosArticulos();
@@ -14,8 +13,14 @@ for (const art of articulos) {
   <section class="archivo">
     <header class="archivo__encabezado">
       <h1 class="archivo__titulo">archivo</h1>
-      <p class="etiqueta">{articulos.length} textos, de más nuevo a más viejo</p>
-      <Nota flecha="abajo" class="archivo__nota">todo lo que hay, hasta ahora</Nota>
+      <p class="etiqueta">{articulos.length} {articulos.length === 1 ? 'texto' : 'textos'}, de más nuevo a más viejo</p>
+      <p class="archivo__marca">
+        <span class="archivo__marca-texto">todo lo que hay,<br />hasta ahora</span>
+        <svg class="archivo__marcador" viewBox="0 0 200 100" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M168 14 C 120 -4, 24 4, 11 46 C 3 86, 90 98, 150 88 C 196 80, 198 30, 152 14 C 132 8, 106 8, 80 12" />
+          <path d="M40 22 C 70 10, 130 8, 176 24" class="repaso" />
+        </svg>
+      </p>
     </header>
 
     {[...porAnio].map(([anio, lista]) => (

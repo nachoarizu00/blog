@@ -516,13 +516,10 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 .anio__numero {
   align-self: start;
   font-family: var(--f-titulo);
-  font-variation-settings: 'wght' 300, 'opsz' 144, 'WONK' 0;
-  font-style: italic;
-  font-size: clamp(3.4rem, 9vw, 8rem);
+  font-variation-settings: 'wght' 480, 'opsz' 144, 'SOFT' 0, 'WONK' 0;
+  font-size: clamp(3rem, 7vw, 6rem);
   line-height: 0.9;
-  letter-spacing: -0.03em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--tinta);
+  letter-spacing: -0.035em;
 }
 .fila a {
   display: grid;
@@ -744,4 +741,28 @@ main:has(.nosotros) .nosotros__lienzo { width: 100%; margin-left: 0; }
 @keyframes cabecera-fondo {
   from { background: rgba(255, 255, 255, 0); border-bottom-color: transparent; }
   to { background: rgba(255, 255, 255, 0.97); border-bottom-color: var(--regla); }
+}
+
+/* ───────── Archivo: nota a mano en diagonal, encerrada con marcador ───────── */
+.archivo__marca {
+  position: relative;
+  justify-self: end;
+  margin: 0.8rem 2.2rem 0 0;
+  padding: 0.55em 1.2em;
+  font-family: var(--f-mano);
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  line-height: 0.95;
+  color: var(--tinta);
+  rotate: -8deg;
+  pointer-events: none;
+}
+.archivo__marca-texto { position: relative; display: block; text-align: center; }
+.archivo__marcador {
+  position: absolute; inset: -0.2em -0.35em; width: calc(100% + 0.7em); height: calc(100% + 0.4em);
+  overflow: visible; fill: none; stroke: var(--coral); stroke-width: 3px; stroke-linecap: round; stroke-linejoin: round;
+}
+.archivo__marcador path { vector-effect: non-scaling-stroke; }
+.archivo__marcador .repaso { stroke-width: 1.6px; opacity: 0.7; }
+@media (min-width: 900px) {
+  .archivo__marca { position: absolute; right: 5%; top: 1.5rem; margin: 0; }
 }
