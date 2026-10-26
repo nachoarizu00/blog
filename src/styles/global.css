@@ -690,7 +690,7 @@ main:has(.nosotros) .nosotros__lienzo { width: 100%; margin-left: 0; }
   pointer-events: none;
 }
 .cabecera__logo { display: block; line-height: 0; }
-.cabecera__logo img { display: block; width: clamp(8rem, 12vw, 11rem); height: auto; mix-blend-mode: multiply; }
+.cabecera__logo img { display: block; width: clamp(9.6rem, 14.4vw, 13.2rem); height: auto; mix-blend-mode: multiply; }
 
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: scroll()) {
