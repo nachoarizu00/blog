@@ -576,10 +576,47 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 .texto__siguiente { position: relative; }
 .texto__siguiente > :not(.pincelada) { position: relative; z-index: 1; }
 
-/* ───────── Nosotros: la imagen va tal cual, sin tocar ───────── */
 .solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.nosotros { padding-top: clamp(0.5rem, 2vw, 2rem); }
-.nosotros__imagen { display: block; width: min(100%, 46rem); height: auto; margin-inline: auto; mix-blend-mode: multiply; }
+
+/* ───────── Nosotros ───────── */
+.nosotros__lienzo { position: relative; max-width: 64rem; margin-inline: auto; padding: clamp(5rem, 11vw, 8rem) var(--margen) clamp(4rem, 9vw, 6rem); }
+.nosotros__texto {
+  position: relative;
+  z-index: 1;
+  max-width: 41rem;
+  margin-inline: auto;
+  text-align: center;
+  font-size: clamp(1.15rem, 0.9rem + 0.75vw, 1.5rem);
+  line-height: 1.45;
+}
+.nosotros__texto p { text-wrap: balance; }
+.nosotros__texto p + p { margin-top: 1.5em; }
+.nosotros__nombre { font-weight: 650; font-size: 1.25em; line-height: 1; letter-spacing: -0.01em; }
+.nosotros__nombre-parrafo { line-height: 1.5; }
+.nosotros__sutil { text-decoration: underline; text-decoration-color: var(--tenue); text-decoration-thickness: 0.05em; text-underline-offset: 0.18em; }
+.nosotros__fuerte, .nosotros__cierre { font-weight: 650; }
+.nosotros__fuerte { font-size: 1.22em; line-height: 1.3; margin-top: 1.7em; }
+.nosotros__cierre { font-weight: 650; }
+
+.nosotros__deco { position: absolute; z-index: 0; height: auto; max-width: none; pointer-events: none; user-select: none; }
+.nosotros__deco--garabato-1 { left: 3.9%; top: 2%; width: 18%; }
+.nosotros__deco--salpicadura-1 { right: 0; top: 0; width: 32.6%; }
+.nosotros__deco--salpicadura-2 { left: 0; top: 17.6%; width: 13.7%; }
+.nosotros__deco--puntos-1 { right: 0; top: 38.4%; width: 8.2%; }
+.nosotros__deco--garabato-2 { right: 1.4%; top: 21.5%; width: 10.3%; }
+.nosotros__deco--garabato-3 { left: 2.9%; top: 47.9%; width: 7.8%; }
+.nosotros__deco--salpicadura-3 { left: 0; top: 67%; width: 13.7%; }
+.nosotros__deco--garabato-4 { right: 0; top: 86.3%; width: 17.5%; }
 @media (max-width: 899px) {
-  .nosotros__imagen { width: 100vw; max-width: none; margin-left: calc(50% - 50vw); }
+  .nosotros__lienzo { padding-inline: 1.6rem; }
+  .nosotros__texto { padding-inline: 0.3rem; }
+  .nosotros__fuerte { font-size: 1.12em; }
+  .nosotros__deco--garabato-1 { left: 0; top: 0.4%; width: 20%; }
+  .nosotros__deco--salpicadura-1 { width: 34%; }
+  .nosotros__deco--salpicadura-2 { top: 20%; width: 8%; opacity: 0.85; }
+  .nosotros__deco--garabato-2 { right: -1%; top: 31%; width: 8%; }
+  .nosotros__deco--puntos-1 { top: 47%; width: 5%; }
+  .nosotros__deco--garabato-3 { left: 0.5%; top: 55%; width: 6.5%; }
+  .nosotros__deco--salpicadura-3 { top: 70%; width: 8%; }
+  .nosotros__deco--garabato-4 { right: -2%; top: 90%; width: 22%; }
 }

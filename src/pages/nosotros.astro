@@ -1,28 +1,48 @@
 ---
 import Base from '../layouts/Base.astro';
+import Marca from '../components/Marca.astro';
 
-// Texto de la imagen, para lectores de pantalla y buscadores.
-const texto = `Cambió la manera de comunicar. Eso está claro.
-
-Tenemos menos tiempo, consumimos más información y nuestra atención se reparte entre demasiadas cosas, todas al mismo tiempo. Pero no estamos tan seguros de que eso signifique que hayamos perdido el interés por entender lo que pasa. Un poco seguimos teniendo las mismas preguntas. Quizás, entonces, es solamente cuestión de encontrar ángulos nuevos.
-
-cualquiera nace un poco de esa intuición. Y de otras. No es tan lineal la cosa honestamente si esto sale bien es un milagro.
-
-No somos una revista académica. Tampoco pretendemos ser un diario. Puede que solo seamos un escape del Imperio de los Formatos — no estaría tan mal. Nos gusta pensar en serio, sí, pero también escribir como queremos.
-
-Nos interesa la política, el arte, la literatura, el cine, la música, la filosofía. Nos interesa cada una de esas cosas por separado, pero mucho más lo que puede pasar cuando de repente se encuentran.
-
-Porque una discusión jurídica puede tener algo que ver con una escena de Friends, una canción de Tan Biónica puede ayudarnos a pensar un problema político importante, y cualquiera de las dos cosas puede cruzarse con una tercera que, en principio, no tenía absolutamente nada que hacer ahí.
-
-Nos gustan esas conexiones. Especialmente si a primera vista hacen ruido.
-
-Creemos, en definitiva, que hay muchas maneras de pensar lo que pasa. Y que vale la pena hacerles lugar.
-
-Si algo de todo esto te convence: mucho gusto, parece que estás en cualquiera.`;
+// Decoraciones recortadas de la ilustración original (public/arte/nosotros/).
+// Posiciones en % del lienzo.
+const decoraciones = [
+  { nombre: 'garabato-1', ancho: 185, alto: 115 },
+  { nombre: 'salpicadura-1', ancho: 334, alto: 290 },
+  { nombre: 'salpicadura-2', ancho: 140, alto: 275 },
+  { nombre: 'puntos-1', ancho: 84, alto: 210 },
+  { nombre: 'garabato-2', ancho: 105, alto: 290 },
+  { nombre: 'garabato-3', ancho: 80, alto: 125 },
+  { nombre: 'salpicadura-3', ancho: 140, alto: 410 },
+  { nombre: 'garabato-4', ancho: 179, alto: 211 },
+];
 ---
 <Base titulo="Nosotros" descripcion="Cambió la manera de comunicar. cualquiera nace un poco de esa intuición: pensamos en serio, escribimos como queremos.">
   <section class="nosotros">
-    <h1 class="solo-lectores">Nosotros</h1>
-    <img class="nosotros__imagen" src="/arte/nosotros.webp" width="1024" height="1536" alt={texto} decoding="async" />
+    <div class="nosotros__lienzo">
+      {decoraciones.map((d) => (
+        <img class={`nosotros__deco nosotros__deco--${d.nombre}`} src={`/arte/nosotros/${d.nombre}.webp`} width={d.ancho} height={d.alto} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+      ))}
+
+      <div class="nosotros__texto">
+        <h1 class="solo-lectores">Nosotros</h1>
+
+        <p>Cambió la manera de comunicar. Eso está claro.</p>
+
+        <p>Tenemos menos tiempo, consumimos más información y nuestra atención se reparte entre demasiadas cosas, todas al mismo tiempo. Pero no estamos tan seguros de que eso signifique que hayamos perdido el interés por entender lo que pasa. Un poco seguimos teniendo las mismas preguntas. Quizás, entonces, es solamente cuestión de encontrar ángulos nuevos.</p>
+
+        <p class="nosotros__nombre-parrafo"><strong class="nosotros__nombre"><Marca tipo="subrayado">cualquiera</Marca></strong> nace un poco de esa intuición. Y de otras.<br />No es tan lineal la cosa honestamente si esto sale bien es un milagro.</p>
+
+        <p>No somos una revista académica. Tampoco pretendemos ser un diario. Puede que solo seamos un escape del <em>Imperio</em> de los Formatos — no <span class="nosotros__sutil">estaría</span> tan mal. Nos gusta pensar en serio, sí, pero también escribir como queremos.</p>
+
+        <p>Nos interesa la política, el arte, la literatura, el cine, la música, la filosofía. Nos interesa cada una de esas cosas por separado, pero mucho más lo que puede pasar cuando de repente se encuentran.</p>
+
+        <p>Porque una discusión jurídica puede tener algo que ver con una escena de Friends, una canción de Tan Biónica puede ayudarnos a pensar un problema político importante, y cualquiera de las dos cosas puede cruzarse con una tercera que, en principio, no tenía absolutamente nada que hacer ahí.</p>
+
+        <p class="nosotros__fuerte">Nos gustan esas conexiones. Especialmente si a <Marca tipo="subrayado">primera vista hacen ruido.</Marca></p>
+
+        <p>Creemos, en definitiva, que hay muchas maneras de pensar lo que pasa. Y que vale la pena hacerles lugar.</p>
+
+        <p>Si algo de todo esto te convence: mucho gusto,<br /><strong class="nosotros__cierre"><Marca tipo="subrayado">parece que estás en cualquiera.</Marca></strong></p>
+      </div>
+    </div>
   </section>
 </Base>
