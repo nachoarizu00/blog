@@ -8,5 +8,20 @@ const { portada = false, logoImagen = false } = Astro.props;
   {portada
     ? <span class="etiqueta">octubre 2026</span>
     : <Logo tamano="sm" imagen={logoImagen} />}
+  {portada && (
+    <a class="cabecera__logo" href="/" data-logo-arriba aria-label="cualquiera, volver arriba">
+      <img src="/arte/logo.webp" width="1540" height="350" alt="" aria-hidden="true" decoding="async" />
+    </a>
+  )}
   <Menu />
 </header>
+
+<script>
+  // En la portada, tocar el logo chico vuelve arriba suavemente (en vez de recargar la página).
+  document.addEventListener('click', (e) => {
+    const a = (e.target as HTMLElement).closest('[data-logo-arriba]');
+    if (!a || location.pathname !== '/') return;
+    e.preventDefault();
+    scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  });
+</script>

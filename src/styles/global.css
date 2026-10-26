@@ -669,3 +669,60 @@ main:has(.nosotros) .nosotros__lienzo { width: 100%; margin-left: 0; }
 }
 @keyframes salir-pagina { to { opacity: 0; } }
 @keyframes entrar-pagina { from { opacity: 0; translate: 0 0.6rem; } }
+
+/* ───────── Portada: cabecera fija con el logo que aparece al scrollear ───────── */
+.cabecera--portada {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+.cabecera--portada .menu-boton { justify-self: end; }
+.cabecera--portada::before {          /* fondo a todo el ancho de la pantalla */
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0 calc(50% - 50vw);
+  background: rgba(255, 255, 255, 0);
+  border-bottom: 1px solid transparent;
+  pointer-events: none;
+}
+.cabecera__logo { display: block; line-height: 0; }
+.cabecera__logo img { display: block; width: clamp(8rem, 12vw, 11rem); height: auto; mix-blend-mode: multiply; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .cabecera--portada {
+      --desde: 24vw;    /* el logo grande empieza a salir de la pantalla */
+      --hasta: 36vw;    /* y el chico ya está en su lugar */
+    }
+    @media (max-width: 899px) {
+      .cabecera--portada { --desde: 42vw; --hasta: 60vw; }
+    }
+    .cabecera__logo {
+      opacity: 0;
+      animation-name: logo-llega;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root);
+      animation-range: var(--desde) var(--hasta);
+    }
+    .cabecera--portada::before {
+      animation-name: cabecera-fondo;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root);
+      animation-range: calc(var(--desde) - 7vw) var(--desde);
+    }
+  }
+}
+@keyframes logo-llega {
+  from { opacity: 0; translate: 0 1.1rem; scale: 1.5; }
+  to { opacity: 1; translate: 0 0; scale: 1; }
+}
+@keyframes cabecera-fondo {
+  from { background: rgba(255, 255, 255, 0); border-bottom-color: transparent; }
+  to { background: rgba(255, 255, 255, 0.97); border-bottom-color: var(--regla); }
+}
