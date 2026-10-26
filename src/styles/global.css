@@ -593,8 +593,26 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 .nosotros__texto p { text-wrap: balance; }
 .nosotros__texto p + p { margin-top: 1.5em; }
 .nosotros__nombre { font-weight: 650; font-size: 1.25em; line-height: 1; letter-spacing: -0.01em; }
-.nosotros__nombre-parrafo { line-height: 1.5; }
-.nosotros__aparte { display: block; margin-top: 0.5em; font-size: max(0.5em, 0.8rem); line-height: 1.4; }
+.nosotros__nombre-parrafo { line-height: 1.5; margin-bottom: 4.4rem; }
+.nosotros__intuicion { position: relative; display: inline-block; }
+.nosotros__flecha {
+  position: absolute; left: 48%; top: 82%; width: 2.6rem; height: auto; overflow: visible;
+  fill: none; stroke: var(--tinta); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+  pointer-events: none;
+}
+.nosotros__nota {
+  position: absolute; left: calc(48% + 2.8rem); top: 100%;
+  width: 13.5rem; text-align: left; white-space: normal;
+  font-family: var(--f-mano); font-size: 1.3rem; line-height: 0.95; font-weight: 400; letter-spacing: 0;
+  color: var(--tinta); rotate: -2deg; transform-origin: 0 0;
+}
+@media (max-width: 899px) {
+  /* en celular la nota va debajo, hacia la izquierda, y la flecha sale de "intuición" hacia ella */
+  .nosotros__flecha { left: auto; right: 0.1rem; top: 82%; width: 2.2rem; scale: -1 1; }
+  .nosotros__nota { left: auto; right: 2.5rem; top: calc(100% + 0.5rem); width: 13rem; text-align: right; font-size: 1.2rem; transform-origin: 100% 0; }
+  .nosotros__nombre-parrafo { margin-bottom: 5.6rem; }
+}
+
 .nosotros__fuerte, .nosotros__cierre { font-weight: 650; }
 .nosotros__fuerte { font-size: 1.22em; line-height: 1.3; margin-top: 1.7em; }
 
