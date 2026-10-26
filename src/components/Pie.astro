@@ -1,8 +1,21 @@
 ---
 import Logo from './Logo.astro';
+
+const secciones = [
+  { texto: 'Principal', href: '/' },
+  { texto: 'Archivo', href: '/archivo/' },
+  { texto: 'Nosotros', href: '/nosotros/' },
+  { texto: 'Contacto', href: '/contacto/' },
+];
+const actual = Astro.url.pathname;
 ---
 <footer class="pie">
   <Logo tamano="sm" imagen />
-  <p class="pie__lema">Revista cultural colectiva.<br />Nada que ver. Hasta que sí.</p>
-  <p class="etiqueta pie__fin">© 2026</p>
+  <p class="pie__lema">Nada que ver. Hasta que sí.</p>
+  <nav class="pie__nav" aria-label="Secundaria">
+    {secciones.map((s) => (
+      <a href={s.href} aria-current={(s.href === '/' ? actual === '/' : actual.startsWith(s.href)) ? 'page' : undefined}>{s.texto}</a>
+    ))}
+  </nav>
+  <p class="pie__fin">Copyright 2026 - Todos los derechos reservados.</p>
 </footer>

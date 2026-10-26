@@ -148,15 +148,34 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 
 .pie {
   display: grid;
-  gap: 1.5rem;
+  justify-items: center;
+  gap: 1.6rem;
   margin-top: clamp(6rem, 14vw, 12rem);
-  padding-block: 2.5rem 3rem;
+  padding-block: clamp(3rem, 6vw, 4.5rem) clamp(2.5rem, 5vw, 3.5rem);
   border-top: 1px solid var(--regla);
+  text-align: center;
 }
-.pie__lema { font-style: italic; color: var(--tinta-suave); max-width: 28rem; }
-@media (min-width: 900px) {
-  .pie { grid-template-columns: 1fr 2fr auto; align-items: end; }
+.pie .logo { justify-self: center; }
+.pie .logo--imagen .logo__ilustrado { width: clamp(11rem, 18vw, 15rem); }
+.pie__lema {
+  font-family: var(--f-titulo);
+  font-variation-settings: 'wght' 480, 'opsz' 96, 'SOFT' 0, 'WONK' 0;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
 }
+.pie__nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem clamp(1.4rem, 3vw, 2.4rem); margin-top: 0.8rem; }
+.pie__nav a {
+  font-family: var(--f-titulo);
+  font-variation-settings: 'wght' 500, 'opsz' 48, 'SOFT' 0, 'WONK' 0;
+  font-size: 1.15rem;
+  padding: 0.3rem 0;
+  background: linear-gradient(var(--celeste), var(--celeste)) left 92% / 0 0.14em no-repeat;
+  transition: background-size 0.3s ease;
+}
+.pie__nav a:hover, .pie__nav a[aria-current='page'] { background-size: 100% 0.14em; }
+.pie__fin { margin-top: 0.8rem; font-size: 1rem; color: var(--tinta-suave); }
 
 /* ───────── Logotipo ───────── */
 .logo { position: relative; display: inline-block; justify-self: start; width: fit-content; font-family: var(--f-titulo); line-height: 1; color: var(--tinta); }
