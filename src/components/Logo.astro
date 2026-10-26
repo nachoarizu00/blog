@@ -4,12 +4,18 @@ import Pincelada from './Pincelada.astro';
 interface Props {
   tamano?: 'xl' | 'sm';
   enlace?: boolean;
+  /** usa el logotipo ilustrado (imagen) en lugar del texto con pincelada */
+  imagen?: boolean;
 }
-const { tamano = 'sm', enlace = true } = Astro.props;
+const { tamano = 'sm', enlace = true, imagen = false } = Astro.props;
 const Etiqueta = enlace ? 'a' : 'span';
 const props = enlace ? { href: '/', 'aria-label': 'cualquiera, inicio' } : { role: 'img' as const, 'aria-label': 'cualquiera' };
 ---
-<Etiqueta class:list={['logo', `logo--${tamano}`]} {...props}>
-  {tamano === 'sm' && <Pincelada tipo="celeste" class="logo__pincelada" />}
-  <span class="logo__texto" aria-hidden="true">cualquiera</span>
+<Etiqueta class:list={['logo', `logo--${tamano}`, { 'logo--imagen': imagen }]} {...props}>
+  {imagen
+    ? <img class="logo__ilustrado" src="/arte/logo.webp" width="1540" height="350" alt="" aria-hidden="true" decoding="async" />
+    : <>
+        {tamano === 'sm' && <Pincelada tipo="celeste" class="logo__pincelada" />}
+        <span class="logo__texto" aria-hidden="true">cualquiera</span>
+      </>}
 </Etiqueta>

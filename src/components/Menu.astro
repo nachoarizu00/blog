@@ -1,5 +1,6 @@
 ---
 const secciones = [
+  { texto: 'Principal', href: '/' },
   { texto: 'Archivo', href: '/archivo/' },
   { texto: 'Nosotros', href: '/nosotros/' },
   { texto: 'Contacto', href: '/contacto/' },
@@ -19,7 +20,7 @@ const actual = Astro.url.pathname;
       <ul class="menu__lista">
         {secciones.map((s, i) => (
           <li>
-            <a href={s.href} aria-current={actual.startsWith(s.href) ? 'page' : undefined}>
+            <a href={s.href} aria-current={(s.href === '/' ? actual === '/' : actual.startsWith(s.href)) ? 'page' : undefined}>
               <span class="etiqueta menu__numero">{String(i + 1).padStart(2, '0')}</span>
               <span class="menu__texto">{s.texto}</span>
             </a>
@@ -31,35 +32,44 @@ const actual = Astro.url.pathname;
 </dialog>
 
 <script>
-  const menu = document.querySelector<HTMLDialogElement>('#menu');
-  const abrir = document.querySelector<HTMLButtonElement>('[data-menu-abrir]');
+  // Delegación en document: sigue funcionando después de cada navegación (ClientRouter reemplaza el DOM).
+  const DURACION = 420;
   let cerrando = false;
+  const menu = () => document.querySelector<HTMLDialogElement>('#menu');
+  const boton = () => document.querySelector<HTMLButtonElement>('[data-menu-abrir]');
 
   function abrirMenu() {
-    if (!menu || menu.open) return;
-    menu.showModal();
-    abrir?.setAttribute('aria-expanded', 'true');
-    requestAnimationFrame(() => menu.classList.add('menu--visible'));
+    const m = menu();
+    if (!m || m.open) return;
+    m.showModal();
+    boton()?.setAttribute('aria-expanded', 'true');
+    requestAnimationFrame(() => m.classList.add('menu--visible'));
   }
 
   function cerrarMenu() {
-    if (!menu || !menu.open || cerrando) return;
+    const m = menu();
+    if (!m || !m.open || cerrando) return;
     cerrando = true;
-    menu.classList.remove('menu--visible');
+    m.classList.remove('menu--visible');
     const terminar = () => {
-      menu.close();
-      abrir?.setAttribute('aria-expanded', 'false');
+      m.close();
+      boton()?.setAttribute('aria-expanded', 'false');
       cerrando = false;
     };
-    // sin movimiento reducido, esperamos a que termine el deslizamiento
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) terminar();
-    else setTimeout(terminar, 420);
+    else setTimeout(terminar, DURACION);
   }
 
-  abrir?.addEventListener('click', abrirMenu);
-  menu?.querySelector('[data-menu-cerrar]')?.addEventListener('click', cerrarMenu);
-  // clic fuera del panel (sobre el fondo atenuado)
-  menu?.addEventListener('click', (e) => { if (e.target === menu) cerrarMenu(); });
+  document.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement;
+    if (t.closest('[data-menu-abrir]')) abrirMenu();
+    else if (t.closest('[data-menu-cerrar]')) cerrarMenu();
+    else if (t.id === 'menu') cerrarMenu();            // clic sobre el fondo atenuado
+  });
   // Esc: usamos nuestra animación en lugar del cierre abrupto
-  menu?.addEventListener('cancel', (e) => { e.preventDefault(); cerrarMenu(); });
+  document.addEventListener('cancel', (e) => {
+    if ((e.target as HTMLElement).id === 'menu') { e.preventDefault(); cerrarMenu(); }
+  }, true);
+  // al navegar, el menú nuevo arranca cerrado
+  document.addEventListener('astro:after-swap', () => { cerrando = false; });
 </script>

@@ -46,21 +46,6 @@ const [principal, cita, a, b, c, d, e] = (await todosLosArticulos()).slice(0, 7)
     {a && <Pieza articulo={a} variante="a" marca="circulo" />}
     {b && <Pieza articulo={b} variante="b" marca="resaltado" />}
 
-    <aside class="temas">
-      <p class="etiqueta">De qué hablamos</p>
-      <ul>
-        <li>política</li>
-        <li>derecho</li>
-        <li>arte</li>
-        <li>cine</li>
-        <li>literatura</li>
-        <li>música</li>
-        <li>filosofía</li>
-        <li><Marca tipo="tachado">etcétera</Marca></li>
-      </ul>
-      <Nota flecha="arriba" class="temas__nota">cualquier cosa</Nota>
-    </aside>
-
     {c && <Pieza articulo={c} variante="c" marca="subrayado" />}
     {d && <Pieza articulo={d} variante="d" marca="circulo" />}
     {e && <Pieza articulo={e} variante="e" marca="resaltado" />}

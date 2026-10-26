@@ -344,9 +344,6 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 .cita footer a { text-decoration: underline; text-decoration-color: var(--regla); text-underline-offset: 0.2em; }
 .cita footer a:hover { text-decoration-color: var(--celeste); }
 
-.temas { max-width: 14rem; display: grid; gap: 0.6rem; margin-left: 4%; }
-.temas ul { display: grid; gap: 0.05rem; font-family: var(--f-titulo); font-variation-settings: 'wght' 400, 'opsz' 72; font-size: 1.35rem; line-height: 1.25; }
-.temas__nota { margin-top: 0.4rem; margin-left: 1.5rem; }
 
 .todo {
   display: flex;
@@ -378,8 +375,7 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
   .cita { grid-column: 9 / 13; grid-row: 1; margin-top: 12vw; }
   .pieza--a { grid-column: 2 / 7; grid-row: 2; }
   .pieza--b { grid-column: 8 / 13; grid-row: 2; margin-top: 7vw; }
-  .temas { grid-column: 1 / 4; grid-row: 3; margin-top: 2vw; }
-  .pieza--c { grid-column: 4 / 12; grid-row: 3; margin-top: 5vw; }
+  .pieza--c { grid-column: 3 / 11; grid-row: 3; margin-top: 2vw; }
   .pieza--d { grid-column: 1 / 7; grid-row: 4; }
   .pieza--e { grid-column: 8 / 13; grid-row: 4; margin-top: 10vw; }
   .todo { grid-column: 2 / 13; grid-row: 5; margin-top: 3vw; }
@@ -630,3 +626,47 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 /* Nosotros usa todo el ancho de la pantalla: los dibujos cortados se pegan al borde real */
 main:has(.nosotros) { max-width: none; padding-inline: 0; overflow-x: clip; }
 main:has(.nosotros) .nosotros__lienzo { width: 100%; margin-left: 0; }
+
+/* ───────── Logotipo ilustrado (Nosotros y pie) ───────── */
+.logo--imagen { display: inline-block; line-height: 0; }
+.logo--imagen .logo__ilustrado { display: block; width: clamp(8.5rem, 15vw, 11rem); height: auto; mix-blend-mode: multiply; }
+
+/* ───────── Nosotros: el texto aparece y se va con el scroll ───────── */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .nosotros__texto > p {
+      animation-name: aparecer-con-scroll;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+    .nosotros__deco {
+      animation-name: aparecer-deco;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+@keyframes aparecer-con-scroll {
+  0% { opacity: 0; translate: 0 1.6rem; filter: blur(3px); }
+  22% { opacity: 1; translate: 0 0; filter: blur(0); }
+  72% { opacity: 1; translate: 0 0; filter: blur(0); }
+  100% { opacity: 0; translate: 0 -1rem; filter: blur(2px); }
+}
+@keyframes aparecer-deco {
+  0% { opacity: 0; }
+  25% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ───────── Transición entre páginas ───────── */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) { animation: 0.22s ease-in both salir-pagina; }
+  ::view-transition-new(root) { animation: 0.38s 0.08s ease-out both entrar-pagina; }
+}
+@keyframes salir-pagina { to { opacity: 0; } }
+@keyframes entrar-pagina { from { opacity: 0; translate: 0 0.6rem; } }

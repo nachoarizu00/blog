@@ -8,16 +8,19 @@ import '@fontsource/ibm-plex-mono/400.css';
 import '../styles/global.css';
 import Cabecera from '../components/Cabecera.astro';
 import Pie from '../components/Pie.astro';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   titulo?: string;
   descripcion?: string;
   portada?: boolean;
+  logoImagen?: boolean;
 }
 const {
   titulo,
   descripcion = 'cualquiera, revista cultural colectiva de ensayos, crítica e intervenciones libres. Pensamos en serio, escribimos como queremos.',
   portada = false,
+  logoImagen = false,
 } = Astro.props;
 const tituloPagina = titulo ? `${titulo} — cualquiera` : 'cualquiera — revista cultural colectiva';
 ---
@@ -33,9 +36,10 @@ const tituloPagina = titulo ? `${titulo} — cualquiera` : 'cualquiera — revis
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{tituloPagina}</title>
+    <ClientRouter />
   </head>
   <body>
-    <Cabecera portada={portada} />
+    <Cabecera portada={portada} logoImagen={logoImagen} />
     <main>
       <slot />
     </main>

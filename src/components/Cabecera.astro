@@ -1,12 +1,12 @@
 ---
 import Logo from './Logo.astro';
 import Menu from './Menu.astro';
-interface Props { portada?: boolean }
-const { portada = false } = Astro.props;
+interface Props { portada?: boolean; logoImagen?: boolean }
+const { portada = false, logoImagen = false } = Astro.props;
 ---
 <header class:list={['cabecera', { 'cabecera--portada': portada }]}>
   {portada
     ? <span class="etiqueta">octubre 2026</span>
-    : <Logo tamano="sm" />}
+    : <Logo tamano="sm" imagen={logoImagen} />}
   <Menu />
 </header>
