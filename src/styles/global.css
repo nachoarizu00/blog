@@ -506,11 +506,12 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 @media (min-width: 900px) {
   .texto__encabezado, .prosa, .texto__siguiente { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--hueco); }
   .texto__encabezado > * { grid-column: 1 / -1; }
-  .texto__encabezado > .texto__dek, .texto__encabezado > .texto__firma { grid-column: 4 / 11; }
-  .prosa > * { grid-column: 4 / 10; }
-  .prosa > blockquote { grid-column: 2 / 12; }
-  .prosa > blockquote:nth-of-type(even) { grid-column: 4 / 13; }
-  .texto__siguiente > * { grid-column: 4 / 13; }
+  /* Todo arranca en el margen izquierdo, alineado con el título; la columna de lectura se estira */
+  .texto__encabezado > .texto__dek { grid-column: 1 / 10; max-width: 52rem; font-size: clamp(1.4rem, 1.9vw, 1.9rem); }
+  .texto__encabezado > .texto__firma { grid-column: 1 / 9; max-width: 56rem; }
+  .prosa > * { grid-column: 1 / 9; max-width: 56rem; }
+  .prosa > blockquote { grid-column: 1 / 11; max-width: 62rem; }
+  .texto__siguiente > * { grid-column: 1 / -1; }
 }
 
 /* ───────── Archivo ───────── */
