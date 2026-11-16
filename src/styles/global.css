@@ -784,9 +784,36 @@ main:has(.nosotros) .nosotros__lienzo { width: 100%; margin-left: 0; }
 }
 
 /* ───────── Imágenes dentro del artículo ───────── */
-.prosa figure { margin-block: 2.6em; }
-.prosa figure img { display: block; width: 100%; height: auto; }
 .prosa figcaption { margin-top: 0.8rem; font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.08em; line-height: 1.5; color: var(--tinta-suave); text-transform: uppercase; }
-@media (min-width: 900px) {
-  .prosa > figure { grid-column: 2 / 12; }
+
+/* ───────── Imágenes que se funden con la página (sin recorte cuadrado) ─────────
+   El dibujo trae un fondo de papel: se aclara hasta el blanco, se mezcla con la página
+   y los bordes se difuminan, así queda como un PNG recortado. */
+.pieza__imagen img,
+.prosa figure img {
+  mix-blend-mode: multiply;
+  filter: brightness(1.14) contrast(1.2);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent), linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 16%, #000 84%, transparent), linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
+
+/* En la portada: la imagen va al lado del título (en celular, debajo) */
+.pieza__imagen { display: block; pointer-events: none; }
+.pieza__imagen img { display: block; width: 100%; height: auto; }
+.pieza--con-imagen .pieza__imagen { margin-top: 0.5rem; width: min(100%, 26rem); }
+@media (min-width: 900px) {
+  .pieza--principal.pieza--con-imagen {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 34%);
+    column-gap: clamp(1rem, 3vw, 3rem);
+    align-items: start;
+  }
+  .pieza--principal.pieza--con-imagen > *:not(.pieza__imagen) { grid-column: 1; }
+  .pieza--principal.pieza--con-imagen .pieza__imagen { grid-column: 2; grid-row: 1 / span 5; margin: 2.2rem 0 0; width: auto; }
+  .pieza--principal.pieza--con-imagen .pieza__dek { margin-left: 0; }
+}
+
+/* En el artículo: respeta los márgenes del texto */
+.prosa figure { margin-block: 2.2em; }
+.prosa figure img { display: block; width: 100%; height: auto; }

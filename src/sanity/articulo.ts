@@ -39,6 +39,14 @@ export const articulo = defineType({
       description: 'Una palabra o frase del título que lleva subrayado, círculo o resaltador. Debe estar escrita igual que en el título. Opcional.',
     }),
     defineField({
+      name: 'imagen',
+      title: 'Imagen para la portada (opcional)',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Aparece al lado del título en la portada. Si la dejás vacía, se usa la primera imagen del texto.',
+      fields: [defineField({ name: 'alt', title: 'Descripción de la imagen', type: 'string' })],
+    }),
+    defineField({
       name: 'cuerpo',
       title: 'Texto',
       type: 'array',

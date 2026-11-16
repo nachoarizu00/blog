@@ -15,9 +15,13 @@ export interface DatosArticulo {
   enfasis?: string;
 }
 
+export interface ImagenArticulo { url: string; alt: string; width: number; height: number }
+
 export interface Articulo {
   id: string;
   data: DatosArticulo;
+  /** imagen que acompaña al título en la portada */
+  imagen?: ImagenArticulo;
   /** texto plano, para calcular el tiempo de lectura */
   texto: string;
   cuerpo: { tipo: 'html'; html: string } | { tipo: 'markdown'; entrada: CollectionEntry<'articulos'> };
@@ -32,6 +36,7 @@ const sanity = createClient({
 
 const CONSULTA = `*[_type == "articulo" && defined(slug.current)] | order(fecha desc) {
   "id": slug.current, title, dek, autor, fecha, seccion, pull, enfasis,
+  "imagen": coalesce(imagen, cuerpo[_type == "image"][0]){ alt, "url": asset->url, "dimensions": asset->metadata.dimensions },
   cuerpo[]{ ..., _type == "image" => { "url": asset->url, "dimensions": asset->metadata.dimensions } }
 }`;
 
@@ -65,10 +70,11 @@ function aHtml(cuerpo: Bloque[]): string {
 }
 
 async function desdeSanity(): Promise<Articulo[]> {
-  const filas = await sanity.fetch<(DatosArticulo & { id: string; fecha: string; cuerpo: Bloque[] })[]>(CONSULTA);
-  return filas.map(({ id, cuerpo, fecha, ...resto }) => ({
+  const filas = await sanity.fetch<(DatosArticulo & { id: string; fecha: string; cuerpo: Bloque[]; imagen?: Bloque })[]>(CONSULTA);
+  return filas.map(({ id, cuerpo, fecha, imagen, ...resto }) => ({
     id,
     data: { ...resto, fecha: new Date(`${fecha}T00:00:00Z`) },
+    imagen: imagen?.url ? { url: imagen.url, alt: imagen.alt ?? '', width: imagen.dimensions?.width ?? 1600, height: imagen.dimensions?.height ?? 1200 } : undefined,
     texto: aTextoPlano(cuerpo ?? []),
     cuerpo: { tipo: 'html', html: aHtml(cuerpo ?? []) },
   }));

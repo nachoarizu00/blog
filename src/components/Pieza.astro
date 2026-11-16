@@ -9,12 +9,28 @@ interface Props {
 }
 const { articulo, variante, marca } = Astro.props;
 const { seccion, fecha, title, enfasis, dek, autor } = articulo.data;
+const imagen = articulo.imagen;
+const src = (ancho: number) => (imagen ? `${imagen.url}?auto=format&w=${ancho}` : '');
 ---
-<article class={`pieza pieza--${variante}`}>
+<article class:list={[`pieza pieza--${variante}`, { 'pieza--con-imagen': imagen }]}>
   <p class="etiqueta">{seccion} · {fechaCorta(fecha)}</p>
   <h2 class="pieza__titulo">
     <a href={rutaArticulo(articulo)}><Titulo titulo={title} enfasis={enfasis} marca={marca} /></a>
   </h2>
   <p class="pieza__dek">{dek}</p>
   <p class="etiqueta">por {autor}</p>
+  {imagen && (
+    <a class="pieza__imagen" href={rutaArticulo(articulo)} tabindex="-1" aria-hidden="true">
+      <img
+        src={src(900)}
+        srcset={`${src(500)} 500w, ${src(900)} 900w, ${src(1400)} 1400w`}
+        sizes="(min-width: 900px) 34vw, 90vw"
+        width={imagen.width}
+        height={imagen.height}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    </a>
+  )}
 </article>
