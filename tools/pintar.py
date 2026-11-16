@@ -456,4 +456,3 @@ if __name__ == '__main__':
     garabatos_a()
     garabatos_b()
     garabatos_c()
-    manchon()

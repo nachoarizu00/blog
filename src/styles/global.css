@@ -186,7 +186,6 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
   font-variation-settings: 'wght' 480, 'opsz' 144, 'SOFT' 0, 'WONK' 0;
   letter-spacing: -0.035em;
 }
-.logo__pincelada { position: absolute; z-index: 0; left: 50%; top: 52%; width: 128%; max-width: none; height: auto; translate: -50% -50%; rotate: -2deg; }
 .logo__hero { position: absolute; z-index: 0; left: 50%; top: 50%; width: min(135vw, 2600px); max-width: none; height: auto; translate: -47% -52%; }
 .logo--sm { font-size: 1.6rem; }
 .logo--xl { font-size: clamp(3.8rem, 14vw, 12.5rem); line-height: 0.95; }
@@ -580,8 +579,6 @@ main, .cabecera, .pie { max-width: var(--ancho-max); margin-inline: auto; paddin
 }
 .archivo__encabezado .pincelada, .texto__encabezado .pincelada { position: absolute; z-index: 0; height: auto; }
 .archivo__encabezado > :not(.pincelada, .archivo__nota) { position: relative; z-index: 1; }
-.archivo__pincelada { width: min(54rem, 96%); left: -6%; top: -3.6rem; rotate: -2deg; }
-.texto__pincelada { width: min(52rem, 90%); right: -10%; top: -3rem; rotate: 3deg; opacity: 0.9; }
 .texto__encabezado { position: relative; }
 .texto__encabezado > :not(.pincelada) { position: relative; z-index: 1; }
 

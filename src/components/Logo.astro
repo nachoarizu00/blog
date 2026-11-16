@@ -1,5 +1,4 @@
 ---
-import Pincelada from './Pincelada.astro';
 // El logotipo: «cualquiera» en minúscula, con una pincelada celeste que lo cruza.
 interface Props {
   tamano?: 'xl' | 'sm';
@@ -14,8 +13,5 @@ const props = enlace ? { href: '/', 'aria-label': 'cualquiera, inicio' } : { rol
 <Etiqueta class:list={['logo', `logo--${tamano}`, { 'logo--imagen': imagen }]} {...props}>
   {imagen
     ? <img class="logo__ilustrado" src="/arte/logo.webp" width="1540" height="350" alt="" aria-hidden="true" decoding="async" />
-    : <>
-        {tamano === 'sm' && <Pincelada tipo="celeste" class="logo__pincelada" />}
-        <span class="logo__texto" aria-hidden="true">cualquiera</span>
-      </>}
+    : <span class="logo__texto" aria-hidden="true">cualquiera</span>}
 </Etiqueta>
