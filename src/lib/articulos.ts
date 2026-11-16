@@ -31,10 +31,13 @@ const sanity = createClient({
 });
 
 const CONSULTA = `*[_type == "articulo" && defined(slug.current)] | order(fecha desc) {
-  "id": slug.current, title, dek, autor, fecha, seccion, pull, enfasis, cuerpo
+  "id": slug.current, title, dek, autor, fecha, seccion, pull, enfasis,
+  cuerpo[]{ ..., _type == "image" => { "url": asset->url, "dimensions": asset->metadata.dimensions } }
 }`;
 
-type Bloque = { _type: string; children?: { text?: string }[] };
+type Bloque = { _type: string; children?: { text?: string }[]; url?: string; alt?: string; epigrafe?: string; dimensions?: { width: number; height: number } };
+
+const escapar = (t = '') => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 function aTextoPlano(cuerpo: Bloque[]): string {
   return cuerpo.map((b) => (b.children ?? []).map((c) => c.text ?? '').join('')).join(' ');
@@ -43,7 +46,19 @@ function aTextoPlano(cuerpo: Bloque[]): string {
 function aHtml(cuerpo: Bloque[]): string {
   return toHTML(cuerpo as never, {
     components: {
-      types: { separador: () => '<hr>' },
+      types: {
+        separador: () => '<hr>',
+        image: ({ value }) => {
+          const v = value as Bloque;
+          if (!v.url) return '';
+          const w = v.dimensions?.width ?? 1600;
+          const h = v.dimensions?.height ?? 1200;
+          const base = `${v.url}?auto=format`;
+          const srcset = [800, 1200, 1600, 2400].filter((x) => x <= w).map((x) => `${base}&w=${x} ${x}w`).join(', ') || `${base}&w=${w} ${w}w`;
+          const pie = v.epigrafe ? `<figcaption>${escapar(v.epigrafe)}</figcaption>` : '';
+          return `<figure><img src="${base}&w=1600" srcset="${srcset}" sizes="(min-width: 900px) 70vw, 100vw" width="${w}" height="${h}" alt="${escapar(v.alt)}" loading="lazy" decoding="async" />${pie}</figure>`;
+        },
+      },
       marks: { resaltado: ({ children }) => `<mark>${children}</mark>` },
     },
   });

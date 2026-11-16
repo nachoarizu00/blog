@@ -782,3 +782,11 @@ main:has(.nosotros) .nosotros__lienzo { width: 100%; margin-left: 0; }
 @media (min-width: 900px) {
   .archivo__marca { position: absolute; right: 5%; top: 1.5rem; margin: 0; }
 }
+
+/* ───────── Imágenes dentro del artículo ───────── */
+.prosa figure { margin-block: 2.6em; }
+.prosa figure img { display: block; width: 100%; height: auto; }
+.prosa figcaption { margin-top: 0.8rem; font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.08em; line-height: 1.5; color: var(--tinta-suave); text-transform: uppercase; }
+@media (min-width: 900px) {
+  .prosa > figure { grid-column: 2 / 12; }
+}

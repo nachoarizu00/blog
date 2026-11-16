@@ -67,6 +67,15 @@ export const articulo = defineType({
             ],
           },
         }),
+        defineArrayMember({
+          type: 'image',
+          title: 'Imagen',
+          options: { hotspot: true },
+          fields: [
+            defineField({ name: 'alt', title: 'Descripción de la imagen', type: 'string', description: 'Para quienes no pueden verla y para Google. Ej.: «Dibujo a lápiz de una ciudad colgada entre dos montañas».' }),
+            defineField({ name: 'epigrafe', title: 'Epígrafe (opcional)', type: 'string', description: 'Texto chico que se muestra debajo de la imagen.' }),
+          ],
+        }),
         defineArrayMember({ name: 'separador', title: 'Separador (* * *)', type: 'object', fields: [{ name: 'ok', type: 'boolean', hidden: true }] }),
       ],
       validation: (r) => r.required(),
